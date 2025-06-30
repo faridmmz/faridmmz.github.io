@@ -5,116 +5,106 @@
   <title>Farid MMZ – Game Developer</title>
   <style>
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
-      background: #111;
-      overflow: hidden;
+      height: 100%;
+      width: 100vw;
+      box-sizing: border-box;
+      background: #111; /* fallback */
+      /* fallback for browsers without gradient support */
     }
     body {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      min-height: 200vh; /* allow scrolling */
+      font-family: sans-serif;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 60%,
+        rgba(16,17,24,1) 100%
+      );
     }
-    video {
-      position: absolute;
+    .video-bg {
+      position: fixed;
       top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      width: 100vw; height: 60vh;
+      min-height: 320px;
       object-fit: cover;
+      object-position: top center;
       z-index: 1;
+      pointer-events: none;
+      /* shadow for contrast at bottom */
+      box-shadow: 0 60vh 64px 64px rgba(16,17,24,1) inset;
+      background: rgba(16,17,24,1);
     }
     .overlay {
-      position: relative;
-      z-index: 2;
-      width: 100vw;
-      height: 100vh;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 60vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      text-shadow: 0 4px 16px #000;
+      z-index: 2;
+      pointer-events: none;
     }
-    h1 {
+    .overlay h1 {
+      color: #fff;
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      font-family: sans-serif;
+      text-shadow: 0 4px 24px #000a;
       letter-spacing: 2px;
     }
-    p {
+    .overlay p {
+      color: #e0e0e0;
       font-size: 1.2rem;
-      margin-top: 0;
+      margin: 0;
+      text-shadow: 0 2px 8px #000a;
+    }
+    .placeholder {
+      margin-top: 62vh; /* push content below video */
+      padding: 2rem 0;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 3;
+      position: relative;
+      color: #e0e0e0;
+      text-align: center;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      background: rgba(16,17,24,0.7);
+      border-radius: 20px;
+      box-shadow: 0 2px 24px #1118;
+    }
+    @media (max-width: 700px) {
+      .overlay h1 { font-size: 1.5rem; }
+      .video-bg, .overlay { height: 38vh; min-height: 160px; }
+      .placeholder { margin-top: 40vh; font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-  <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
+  <video
+    class="video-bg"
+    src="Portfolio header.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+  ></video>
   <div class="overlay">
     <h1>Farid MMZ</h1>
     <p>Game Developer Portfolio</p>
   </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Farid MMZ – Game Developer</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: #111;
-      overflow: hidden;
-    }
-    body {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      object-fit: cover;
-      z-index: 1;
-    }
-    .overlay {
-      position: relative;
-      z-index: 2;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-shadow: 0 4px 16px #000;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      font-family: sans-serif;
-      letter-spacing: 2px;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-top: 0;
-    }
-  </style>
-</head>
-<body>
-  <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
-  <div class="overlay">
-    <h1>Farid MMZ</h1>
-    <p>Game Developer Portfolio</p>
+  <div class="placeholder">
+    <strong>Scroll down for more!</strong><br>
+    <p>
+      [Placeholder text] Here you can introduce yourself, list your latest game projects, or share your developer journey. This section can expand to show your skills, links, and project showcases.
+    </p>
+    <p>
+      Replace this text with your About Me, projects, or whatever you want to show off!  
+      <br><br>
+      🚀 <em>Make it yours.</em>
+    </p>
   </div>
 </body>
 </html>
