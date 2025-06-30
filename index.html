@@ -2,30 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Full Video + Scroll Down</title>
+  <title>Skill Network Tree</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: #101118;
-      width: 100vw;
+      width: 100vw; min-height: 100vh;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     .hero-video-wrap {
       width: 100vw;
-      height: 100vh;              /* Video fills window at top */
+      height: 100vh;
+      position: relative;
       background: #101118;
       overflow: hidden;
-      position: relative;
+      z-index: 1;
     }
     .hero-video-wrap video {
       width: 100vw;
       height: 100vh;
-      object-fit: contain;        /* Always show whole video */
+      object-fit: contain;
       object-position: center;
-      background: #101118;
       display: block;
+      background: #101118;
     }
-    .main-content {
+    .landing-name {
+      position: absolute;
+      top: 48%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #eaffff;
+      font-size: 3.2em;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-shadow: 0 8px 36px #21dbff88, 0 2px 10px #063d43cc, 0 1px 0 #242e36;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeInName 1.6s 0.6s forwards;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      text-align: center;
+    }
+    @keyframes fadeInName {
+      from { opacity: 0; transform: translate(-50%, -56%) scale(1.05);}
+      to   { opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    }
+    @media (max-width: 600px) {
+      .landing-name { font-size: 2em; }
+    }
+     .main-content {
       max-width: 700px;
       margin: 0 auto;
       padding: 3rem 1rem 2rem 1rem;
@@ -37,20 +65,151 @@
       border-radius: 18px;
       box-shadow: 0 2px 24px #1118;
       margin-top: 2rem;
+      position: relative;
+      z-index: 2;
     }
-    @media (max-width: 700px) {
-      .main-content {
-        font-size: 1rem;
-        margin-top: 1rem;
-      }
+    /* --- Skill Network Tree --- */
+    .network-tree-container {
+      position: relative;
+      width: 1200px;
+      max-width: 98vw;
+      margin: 80px auto 60px auto;
+      min-height: 420px;
+      height: 570px;
+    }
+    .node {
+      position: absolute;
+      border-radius: 1em;
+      min-width: 170px;
+      max-width: 235px;
+      padding: 1.0em 1.2em;
+      font-size: 1.20em;
+      text-align: center;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 22px #21e7ff30,0 1px 7px #04123c22;
+      user-select: none;
+      background: linear-gradient(110deg, #182845 75%, #1457b1 100%);
+      color: #8beeff;
+      border: 2.5px solid #68eaff88;
+      transition: background 0.2s, color 0.2s, box-shadow 0.21s, border 0.2s, transform 0.16s;
+      z-index: 2;
+    }
+    .node:hover {
+      background: linear-gradient(110deg,#289be2 40%, #1457b1 100%);
+      color: #fff;
+      border: 2.5px solid #e0fcff;
+      box-shadow: 0 8px 32px #00fff666,0 1px 8px #08379caa;
+      transform: scale(1.06);
+    }
+    .node.core {
+      left: 3%; top: 44%;
+      background: linear-gradient(110deg,#1455a8 70%, #20b0d0 100%);
+      color: #fff;
+      font-size: 1.3em;
+      font-weight: 800;
+      border: 3px solid #89f0fd;
+      min-width: 170px; max-width: 280px;
+      box-shadow: 0 4px 32px #51d3ff57;
+      cursor: default;
+      pointer-events: none;
+    }
+    .node.middle { /* Programming */
+      top: 15%;
+      left: 33%;
+    }
+    .node.middle2 { /* Game Engines */
+      top: 44%;
+      left: 33%;
+    }
+    .node.middle3 { /* Soft Skills */
+      top: 73%;
+      left: 33%;
+    }
+    .node.right {    /* AI & Data */
+      top: 25%;
+      left: 71%;
+    }
+    .node.right2 {   /* Game Dev */
+      top: 64%;
+      left: 71%;
+    }
+    /* Subskills */
+    .subskills {
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      top: 105%;
+      width: 100%;
+      min-width: 180px; max-width: 340px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(24,36,55,0.94);
+      border-radius: 0 0 1.2em 1.2em;
+      box-shadow: 0 4px 18px #2eb1ff1b;
+      padding: 0.8em 0 0.9em 0;
+      z-index: 3;
+      border: 1.5px solid #66caff36;
+      animation: fadeDrop 0.27s cubic-bezier(.25,2,.25,.97);
+    }
+    .subskills.open { display: flex; }
+    @keyframes fadeDrop {
+      from { opacity: 0; transform: translateX(-50%) translateY(-20px);}
+      to   { opacity: 1; transform: translateX(-50%) translateY(0);}
+    }
+    .subskill-node {
+      margin: 0.15em 0;
+      padding: 0.38em 1.0em;
+      background: linear-gradient(90deg,#253d66 60%,#238aa7 100%);
+      color: #eaffff;
+      border-radius: 0.6em;
+      font-size: 1.07em;
+      font-weight: 500;
+      box-shadow: 0 1px 8px #007f8b77;
+      border: 1.3px solid #54f8ee55;
+      width: fit-content;
+      transition: background .18s, color .18s, transform .14s;
+      cursor: pointer;
+      text-align: center;
+      user-select: none;
+    }
+    .subskill-node:hover {
+      background: linear-gradient(100deg,#2cd1fc 70%,#176889 100%);
+      color: #07384a;
+      transform: scale(1.11) rotate(-2deg);
+      z-index: 10;
+    }
+    /* SVG Lines */
+    .network-lines {
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .network-tree-container { width:99vw; height:900px;}
+      .node, .node.core { min-width:100px; font-size:0.9em;}
+      .subskills { min-width:90px; max-width: 200px;}
+    }
+    @media (max-width: 600px) {
+      .network-tree-container { width:99vw; height:1180px;}
+      .node, .node.core { min-width:65px; font-size:0.85em;}
+      .subskills { min-width:60px; max-width: 170px;}
+      .node.middle { top:10%; left:41%;}
+      .node.middle2 { top:40%; left:41%;}
+      .node.middle3 { top:70%; left:41%;}
+      .node.right { top:20%; left:75%;}
+      .node.right2 { top:65%; left:75%;}
     }
   </style>
 </head>
 <body>
+  <!-- LANDING VIDEO AND NAME -->
   <div class="hero-video-wrap">
     <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
+    <div class="landing-name">Farid Zandi's Portfolio</div>
   </div>
-  <div class="main-content">
+<div class="main-content">
     <h1>Welcome to My Portfolio!</h1>
     <p>
       This is your scrollable content area.<br>
@@ -58,5 +217,98 @@
       You can keep adding sections below for each of your games or demos!
     </p>
   </div>
+  <!-- SKILL TREE (put a big margin-top so it's always below the fold) -->
+  <div style="margin-top: 90vh;"></div>
+  <div class="network-tree-container">
+    <!-- SVG lines under nodes (now from center of ovals) -->
+    <svg class="network-lines" viewBox="0 0 1200 600">
+      <!-- Core to centers of 3 middle ovals -->
+      <line x1="120" y1="300" x2="470" y2="143" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+      <line x1="120" y1="300" x2="470" y2="300" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+      <line x1="120" y1="300" x2="470" y2="457" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+      <!-- Programming (center top) to AI & Data (center right) -->
+      <line x1="587" y1="143" x2="870" y2="190" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+      <!-- Programming to Game Dev (center right) -->
+      <line x1="587" y1="143" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+      <!-- Game Engines to Game Dev -->
+      <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <!-- NODES -->
+    <div class="node core" style="top: 44%; left: 3%;">Core Skills</div>
+    <div class="node middle" id="cat-programming" style="top: 15%; left: 33%;">Programming</div>
+    <div class="node middle2" id="cat-engines" style="top: 44%; left: 33%;">Game Engines &amp; Tools</div>
+    <div class="node middle3" id="cat-soft" style="top: 73%; left: 33%;">Other / Soft Skills</div>
+    <div class="node right" id="cat-ai" style="top: 25%; left: 71%;">AI &amp; Data</div>
+    <div class="node right2" id="cat-gamedev" style="top: 64%; left: 71%;">Game Development</div>
+    <!-- Subskills dropdowns (JS will position them) -->
+    <div class="subskills" id="skills-programming"></div>
+    <div class="subskills" id="skills-engines"></div>
+    <div class="subskills" id="skills-soft"></div>
+    <div class="subskills" id="skills-ai"></div>
+    <div class="subskills" id="skills-gamedev"></div>
+  </div>
+
+  <script>
+    // Your skill data:
+    const data = {
+      "cat-programming": [
+        "Python","C#","Java","C++","C","GDScript","Bash / PowerShell","Git & Version Control","OOP","Linux"
+      ],
+      "cat-engines": [
+        "Unity","Unreal Engine","Godot","Blender","Photoshop"
+      ],
+      "cat-soft": [
+        "Problem Solving","Critical Thinking","Communication","Teamwork","Documentation","Agile/Scrum","Bug Tracking (Jira/Trello)","Public Speaking"
+      ],
+      "cat-ai": [
+        "Deep Learning","Machine Learning","Computer Vision","Neural Networks"
+      ],
+      "cat-gamedev": [
+        "Game Development","Game Design","Level Design","Prototyping","Playtesting & Balancing","UI/UX for Games","Particle Systems"
+      ]
+    };
+    // Mapping of node IDs to subskills element IDs
+    const map = {
+      "cat-programming": "skills-programming",
+      "cat-engines": "skills-engines",
+      "cat-soft": "skills-soft",
+      "cat-ai": "skills-ai",
+      "cat-gamedev": "skills-gamedev"
+    };
+    // Handle opening/closing dropdowns
+    Object.keys(map).forEach(id => {
+      const node = document.getElementById(id);
+      const drop = document.getElementById(map[id]);
+      // Set subskills
+      drop.innerHTML = data[id].map(skill =>
+        `<div class="subskill-node">${skill}</div>`
+      ).join('');
+      // Position the dropdown right below the node
+      function positionDropdown() {
+        const rect = node.getBoundingClientRect();
+        const parentRect = node.parentNode.getBoundingClientRect();
+        drop.style.top = (node.offsetTop + node.offsetHeight + 6) + "px";
+        drop.style.left = (node.offsetLeft + node.offsetWidth/2) + "px";
+        drop.style.transform = "translateX(-50%)";
+      }
+      // On click: toggle
+      node.addEventListener("click", e => {
+        e.stopPropagation();
+        // Close all others
+        document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
+        // Position & open this one
+        positionDropdown();
+        drop.classList.toggle('open');
+      });
+      // On resize: re-position if open
+      window.addEventListener('resize', () => {
+        if (drop.classList.contains('open')) positionDropdown();
+      });
+    });
+    // Click anywhere else closes all
+    document.body.addEventListener("click", () => {
+      document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
+    });
+  </script>
 </body>
 </html>
