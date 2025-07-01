@@ -12,13 +12,14 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+    /* --- LANDING --- */
     .hero-video-wrap {
       width: 100vw;
       height: 100vh;
       position: relative;
       background: #101118;
       overflow: hidden;
-      z-index: 1;
+      z-index: 2;
     }
     .hero-video-wrap video {
       width: 100vw;
@@ -53,27 +54,69 @@
     @media (max-width: 600px) {
       .landing-name { font-size: 2em; }
     }
-     .main-content {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 3rem 1rem 2rem 1rem;
-      color: #e0e0e0;
-      font-size: 1.25rem;
-      line-height: 1.7;
-      text-align: center;
-      background: rgba(16,17,24,0.93);
-      border-radius: 18px;
-      box-shadow: 0 2px 24px #1118;
-      margin-top: 2rem;
+
+    /* --- BACKGROUND VIDEO UNDER SKILL SECTION --- */
+    .bg-under {
+      width: 100vw;
+      height: 100vh;
+      min-height: 650px;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.82;  /* adjust to taste */
+      pointer-events: none;
+    }
+    .bg-section-wrap {
+      width: 100vw;
+      min-height: 100vh;
       position: relative;
-      z-index: 2;
+      z-index: 1;
+      margin-top: -4px;
+      /* to avoid white gap on some browsers */
+    }
+    /* --- SKILLS --- */
+    .skill-box {
+      max-width: 1320px;
+      margin: 0 auto 80px auto;
+      background: linear-gradient(135deg, #19203d 80%, #174161 100%);
+      border-radius: 26px;
+      box-shadow: 0 4px 40px #0cf9ff1f, 0 2px 28px #112d5e25;
+      padding: 3.5em 2.2em 2.6em 2.2em;
+      position: relative;
+      z-index: 3;
+      border: 2.5px solid #53eaff4a;
+      top: 60px;
+    }
+    .skill-box h2 {
+      color: #89eaff;
+      margin: 0 0 0.33em 0;
+      text-align: center;
+      font-size: 2.15em;
+      letter-spacing: 0.06em;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-weight: 800;
+      text-shadow: 0 2px 24px #0cf9ff38;
+    }
+    .skill-box .box-desc {
+      color: #e3f7fa;
+      font-size: 1.17em;
+      margin-bottom: 2.3em;
+      text-align: center;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.01em;
+      opacity: 0.87;
     }
     /* --- Skill Network Tree --- */
     .network-tree-container {
       position: relative;
       width: 1200px;
       max-width: 98vw;
-      margin: 80px auto 60px auto;
+      margin: 0 auto;
       min-height: 420px;
       height: 570px;
     }
@@ -114,27 +157,11 @@
       cursor: default;
       pointer-events: none;
     }
-    .node.middle { /* Programming */
-      top: 15%;
-      left: 33%;
-    }
-    .node.middle2 { /* Game Engines */
-      top: 44%;
-      left: 33%;
-    }
-    .node.middle3 { /* Soft Skills */
-      top: 73%;
-      left: 33%;
-    }
-    .node.right {    /* AI & Data */
-      top: 25%;
-      left: 71%;
-    }
-    .node.right2 {   /* Game Dev */
-      top: 64%;
-      left: 71%;
-    }
-    /* Subskills */
+    .node.middle { top: 15%; left: 33%; }
+    .node.middle2 { top: 44%; left: 33%; }
+    .node.middle3 { top: 73%; left: 33%; }
+    .node.right {    top: 25%; left: 71%; }
+    .node.right2 {   top: 64%; left: 71%; }
     .subskills {
       position: absolute;
       left: 50%; transform: translateX(-50%);
@@ -187,11 +214,13 @@
       pointer-events: none;
     }
     @media (max-width: 900px) {
+      .skill-box { padding: 2.5em 0.4em 1.8em 0.4em;}
       .network-tree-container { width:99vw; height:900px;}
       .node, .node.core { min-width:100px; font-size:0.9em;}
       .subskills { min-width:90px; max-width: 200px;}
     }
     @media (max-width: 600px) {
+      .skill-box { padding: 1.5em 0.1em 1.1em 0.1em;}
       .network-tree-container { width:99vw; height:1180px;}
       .node, .node.core { min-width:65px; font-size:0.85em;}
       .subskills { min-width:60px; max-width: 170px;}
@@ -204,50 +233,53 @@
   </style>
 </head>
 <body>
-  <!-- LANDING VIDEO AND NAME -->
+  <!-- HERO VIDEO AND NAME -->
   <div class="hero-video-wrap">
     <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
     <div class="landing-name">Farid Zandi's Portfolio</div>
   </div>
-<div class="main-content">
-    <h1>Welcome to My Portfolio!</h1>
-    <p>
-      This is your scrollable content area.<br>
-      Add your <strong>About Me</strong>, <strong>projects</strong>, contact info, or anything you want here.<br>
-      You can keep adding sections below for each of your games or demos!
-    </p>
-  </div>
-  <!-- SKILL TREE (put a big margin-top so it's always below the fold) -->
-  <div style="margin-top: 90vh;"></div>
-  <div class="network-tree-container">
-    <!-- SVG lines under nodes (now from center of ovals) -->
-    <svg class="network-lines" viewBox="0 0 1200 600">
-      <!-- Core to centers of 3 middle ovals -->
-      <line x1="120" y1="300" x2="470" y2="143" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
-      <line x1="120" y1="300" x2="470" y2="300" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
-      <line x1="120" y1="300" x2="470" y2="457" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
-      <!-- Programming (center top) to AI & Data (center right) -->
-      <line x1="587" y1="143" x2="870" y2="190" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
-      <!-- Programming to Game Dev (center right) -->
-      <line x1="587" y1="143" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
-      <!-- Game Engines to Game Dev -->
-      <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
-    </svg>
-    <!-- NODES -->
-    <div class="node core" style="top: 44%; left: 3%;">Core Skills</div>
-    <div class="node middle" id="cat-programming" style="top: 15%; left: 33%;">Programming</div>
-    <div class="node middle2" id="cat-engines" style="top: 44%; left: 33%;">Game Engines &amp; Tools</div>
-    <div class="node middle3" id="cat-soft" style="top: 73%; left: 33%;">Other / Soft Skills</div>
-    <div class="node right" id="cat-ai" style="top: 25%; left: 71%;">AI &amp; Data</div>
-    <div class="node right2" id="cat-gamedev" style="top: 64%; left: 71%;">Game Development</div>
-    <!-- Subskills dropdowns (JS will position them) -->
-    <div class="subskills" id="skills-programming"></div>
-    <div class="subskills" id="skills-engines"></div>
-    <div class="subskills" id="skills-soft"></div>
-    <div class="subskills" id="skills-ai"></div>
-    <div class="subskills" id="skills-gamedev"></div>
-  </div>
 
+  <!-- PIXEL BACKGROUND VIDEO SECTION, covers 1 viewport height from under hero video -->
+  <div class="bg-section-wrap">
+    <video class="bg-under" src="Background.mp4" autoplay loop muted playsinline></video>
+
+    <!-- SKILLS BOX -->
+    <div class="skill-box">
+      <h2>My Skill Network</h2>
+      <div class="box-desc">
+        This interactive skill graph maps out my core programming, game development, AI, and teamwork abilities.<br>
+        Click on any skill category to explore my detailed expertise.
+      </div>
+      <div class="network-tree-container">
+        <!-- SVG lines under nodes (now from center of ovals) -->
+        <svg class="network-lines" viewBox="0 0 1200 600">
+          <!-- Core to centers of 3 middle ovals -->
+          <line x1="120" y1="300" x2="470" y2="143" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+          <line x1="120" y1="300" x2="470" y2="300" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+          <line x1="120" y1="300" x2="470" y2="457" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
+          <!-- Programming (center top) to AI & Data (center right) -->
+          <line x1="587" y1="143" x2="870" y2="190" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+          <!-- Programming to Game Dev (center right) -->
+          <line x1="587" y1="143" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+          <!-- Game Engines to Game Dev -->
+          <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <!-- NODES -->
+        <div class="node core" style="top: 44%; left: 3%;">Core Skills</div>
+        <div class="node middle" id="cat-programming" style="top: 15%; left: 33%;">Programming</div>
+        <div class="node middle2" id="cat-engines" style="top: 44%; left: 33%;">Game Engines &amp; Tools</div>
+        <div class="node middle3" id="cat-soft" style="top: 73%; left: 33%;">Other / Soft Skills</div>
+        <div class="node right" id="cat-ai" style="top: 25%; left: 71%;">AI &amp; Data</div>
+        <div class="node right2" id="cat-gamedev" style="top: 64%; left: 71%;">Game Development</div>
+        <!-- Subskills dropdowns (JS will position them) -->
+        <div class="subskills" id="skills-programming"></div>
+        <div class="subskills" id="skills-engines"></div>
+        <div class="subskills" id="skills-soft"></div>
+        <div class="subskills" id="skills-ai"></div>
+        <div class="subskills" id="skills-gamedev"></div>
+      </div>
+    </div>
+  </div>
   <script>
     // Your skill data:
     const data = {
