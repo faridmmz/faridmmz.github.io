@@ -12,6 +12,7 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+
     /* --- LANDING --- */
     .hero-video-wrap {
       width: 100vw;
@@ -55,43 +56,48 @@
       .landing-name { font-size: 2em; }
     }
 
-    /* --- BACKGROUND VIDEO UNDER SKILL SECTION --- */
-    .bg-under {
+    /* --- REPEATING VIDEO BACKGROUND --- */
+    .wall-bg-stack {
+      position: absolute;
+      top: 100vh; left: 0;
+      width: 100vw;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .wall-bg-stack video {
+      display: block;
       width: 100vw;
       height: 100vh;
-      min-height: 650px;
       object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0.82;  /* adjust to taste */
+      opacity: 0.86;
+      background: #1a2342;
       pointer-events: none;
     }
-    .bg-section-wrap {
-      width: 100vw;
-      min-height: 100vh;
+
+    /* --- MAIN SECTION with padding-top to not overlap the hero --- */
+    .main-bg-wrap {
       position: relative;
+      min-height: 100vh;
       z-index: 1;
-      margin-top: -4px;
-      /* to avoid white gap on some browsers */
+      padding-top: 0;
     }
+
     /* --- SKILLS --- */
     .skill-box {
-  max-width: 1320px;
-  margin: 90vh auto 80px auto;
-  background: linear-gradient(135deg, rgba(25,32,61,0.42) 80%, rgba(23,65,97,0.36) 100%);
-  border-radius: 26px;
-  box-shadow: 0 4px 40px #0cf9ff1f, 0 2px 28px #112d5e25;
-  padding: 3.5em 2.2em 2.6em 2.2em;
-  position: relative;
-  z-index: 3;
-  border: 2.5px solid #53eaff4a;
-  transition: box-shadow .25s;
-  backdrop-filter: blur(2px); /* adds glassy look */
-}
-
+      max-width: 1320px;
+      margin: 0 auto 80px auto;
+      margin-top: 60px;
+      background: linear-gradient(135deg, rgba(25,32,61,0.42) 80%, rgba(23,65,97,0.36) 100%);
+      border-radius: 26px;
+      box-shadow: 0 4px 40px #0cf9ff1f, 0 2px 28px #112d5e25;
+      padding: 3.5em 2.2em 2.6em 2.2em;
+      position: relative;
+      z-index: 3;
+      border: 2.5px solid #53eaff4a;
+      transition: box-shadow .25s;
+      backdrop-filter: blur(2px);
+    }
     .skill-box h2 {
       color: #89eaff;
       margin: 0 0 0.33em 0;
@@ -113,7 +119,6 @@
       letter-spacing: 0.01em;
       opacity: 0.87;
     }
-    /* --- Skill Network Tree --- */
     .network-tree-container {
       position: relative;
       width: 1200px;
@@ -208,7 +213,6 @@
       transform: scale(1.11) rotate(-2deg);
       z-index: 10;
     }
-    /* SVG Lines */
     .network-lines {
       position: absolute;
       left: 0; top: 0; width: 100%; height: 100%;
@@ -241,11 +245,11 @@
     <div class="landing-name">Farid Zandi's Portfolio</div>
   </div>
 
-  <!-- PIXEL BACKGROUND VIDEO SECTION, covers 1 viewport height from under hero video -->
-  <div class="bg-section-wrap">
-    <video class="bg-under" src="Background.mp4" autoplay loop muted playsinline></video>
+  <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
+  <div class="wall-bg-stack" id="wallBgStack"></div>
 
-    <!-- SKILLS BOX -->
+  <!-- SKILLS + MAIN CONTENT -->
+  <div class="main-bg-wrap">
     <div class="skill-box">
       <h2>My Skill Network</h2>
       <div class="box-desc">
@@ -255,15 +259,11 @@
       <div class="network-tree-container">
         <!-- SVG lines under nodes (now from center of ovals) -->
         <svg class="network-lines" viewBox="0 0 1200 600">
-          <!-- Core to centers of 3 middle ovals -->
           <line x1="120" y1="300" x2="470" y2="143" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
           <line x1="120" y1="300" x2="470" y2="300" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
           <line x1="120" y1="300" x2="470" y2="457" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
-          <!-- Programming (center top) to AI & Data (center right) -->
           <line x1="587" y1="143" x2="870" y2="190" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
-          <!-- Programming to Game Dev (center right) -->
           <line x1="587" y1="143" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
-          <!-- Game Engines to Game Dev -->
           <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
         </svg>
         <!-- NODES -->
@@ -283,7 +283,38 @@
     </div>
   </div>
   <script>
-    // Your skill data:
+    // Repeat the wall video background as tall as the page!
+    function stackWallBg() {
+      const vh = window.innerHeight;
+      const main = document.querySelector('.main-bg-wrap');
+      const container = document.getElementById('wallBgStack');
+      container.innerHTML = ''; // Remove old
+      // How many videos needed?
+      const mainHeight = main.offsetHeight;
+      const stackCount = Math.ceil(mainHeight / vh) + 2;
+      for (let i = 0; i < stackCount; i++) {
+        const vid = document.createElement('video');
+        vid.src = "Background.mp4";
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.style.position = 'absolute';
+        vid.style.top = (i * 100) + "vh";
+        vid.style.left = '0';
+        vid.style.width = '100vw';
+        vid.style.height = '100vh';
+        vid.style.objectFit = 'cover';
+        vid.style.opacity = '0.86';
+        vid.style.pointerEvents = 'none';
+        container.appendChild(vid);
+      }
+      container.style.height = (stackCount * 100) + "vh";
+    }
+    window.addEventListener('DOMContentLoaded', stackWallBg);
+    window.addEventListener('resize', stackWallBg);
+
+    // Skill data:
     const data = {
       "cat-programming": [
         "Python","C#","Java","C++","C","GDScript","Bash / PowerShell","Git & Version Control","OOP","Linux"
@@ -301,7 +332,6 @@
         "Game Development","Game Design","Level Design","Prototyping","Playtesting & Balancing","UI/UX for Games","Particle Systems"
       ]
     };
-    // Mapping of node IDs to subskills element IDs
     const map = {
       "cat-programming": "skills-programming",
       "cat-engines": "skills-engines",
@@ -309,37 +339,27 @@
       "cat-ai": "skills-ai",
       "cat-gamedev": "skills-gamedev"
     };
-    // Handle opening/closing dropdowns
     Object.keys(map).forEach(id => {
       const node = document.getElementById(id);
       const drop = document.getElementById(map[id]);
-      // Set subskills
       drop.innerHTML = data[id].map(skill =>
         `<div class="subskill-node">${skill}</div>`
       ).join('');
-      // Position the dropdown right below the node
       function positionDropdown() {
-        const rect = node.getBoundingClientRect();
-        const parentRect = node.parentNode.getBoundingClientRect();
         drop.style.top = (node.offsetTop + node.offsetHeight + 6) + "px";
         drop.style.left = (node.offsetLeft + node.offsetWidth/2) + "px";
         drop.style.transform = "translateX(-50%)";
       }
-      // On click: toggle
       node.addEventListener("click", e => {
         e.stopPropagation();
-        // Close all others
         document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
-        // Position & open this one
         positionDropdown();
         drop.classList.toggle('open');
       });
-      // On resize: re-position if open
       window.addEventListener('resize', () => {
         if (drop.classList.contains('open')) positionDropdown();
       });
     });
-    // Click anywhere else closes all
     document.body.addEventListener("click", () => {
       document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
     });
