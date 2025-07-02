@@ -109,6 +109,70 @@
   0%, 40%   { opacity: 1;}
   60%,100%  { opacity: 0;}
 }
+.about-me-section {
+  /* ...existing styles... */
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 2.2em;
+}
+.about-me-img-wrap {
+  flex-shrink: 0;
+  margin-right: 1.8em;
+  margin-top: 0.15em;
+}
+.about-me-img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 3.5px solid #72eaff;
+  box-shadow: 0 4px 18px #13e9f935, 0 1.5px 7px #13274f50;
+  background: #1d2a44;
+  transition: transform 0.22s;
+}
+.about-me-img:hover {
+  transform: scale(1.04) rotate(-2deg);
+  box-shadow: 0 8px 32px #28f6ff73, 0 1px 8px #162d55a0;
+}
+#aboutme-typing {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+@media (max-width: 700px) {
+  .about-me-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    text-align: center;
+  }
+  .about-me-img-wrap {
+    margin-right: 0;
+    margin-bottom: 1.1em;
+  }
+  #aboutme-typing {
+    text-align: center;
+  }
+}
+
+/* Responsive: Stack on small screens */
+@media (max-width: 700px) {
+  .about-me-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    text-align: center;
+  }
+  .about-me-img-wrap {
+    margin-right: 0;
+    margin-bottom: 1.1em;
+  }
+  #aboutme-typing {
+    text-align: center;
+  }
+}
+
 
     /* --- BACKGROUND WALL VIDEO STACK --- */
     .wall-bg-stack {
@@ -301,9 +365,14 @@
 
  <!-- ABOUT ME SECTION -->
 <div class="about-me-section" id="about">
-  <h2>About Me</h2>
+  <div class="about-me-title-img">
+    <h2>About Me</h2>
+    <img src="me.jpg" alt="Farid Zandi" class="about-me-img" />
+  </div>
   <div id="aboutme-typing"></div>
 </div>
+
+
 
 
   <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
