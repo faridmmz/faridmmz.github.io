@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Skill Network Tree</title>
   <style>
-    /* --- PIXELLARI FONT --- */
     @font-face {
       font-family: 'Pixellari';
       src: url('Pixellari.ttf') format('truetype');
@@ -20,7 +19,7 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    /* ... rest of your CSS ... */
+    /* --- HERO/LANDING --- */
     .hero-video-wrap {
       width: 100vw;
       height: 100vh;
@@ -63,7 +62,55 @@
       .landing-name { font-size: 2em; }
     }
 
-    /* --- REPEATING VIDEO BACKGROUND --- */
+    /* --- ABOUT ME SECTION --- */
+    .about-me-section {
+      width: 100vw;
+      max-width: 700px;
+      margin: -70px auto 60px auto; /* Overlap slightly under landing */
+      padding: 2.5em 1.7em 2.5em 1.7em;
+      background: linear-gradient(120deg,rgba(23,31,52,0.98) 85%,rgba(36,65,100,0.98) 100%);
+      border-radius: 22px;
+      box-shadow: 0 4px 28px #0cf9ff25, 0 2px 10px #222c5231;
+      text-align: center;
+      z-index: 4;
+      position: relative;
+      font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+      font-size: 1.5em;
+      color: #eaffff;
+      letter-spacing: 0.04em;
+      line-height: 1.55;
+      opacity: 0.99;
+      border: 2px solid #25546f38;
+    }
+    .about-me-section h2 {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+      font-size: 2.5em;
+      color: #72eaff;
+      letter-spacing: 0.07em;
+      font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+      font-weight: 800;
+      text-shadow: 0 2px 14px #0cf9ff33;
+    }
+    .about-me-section b, .about-me-section strong {
+      color: #aaf7ff;
+      font-weight: 800;
+      font-family: inherit;
+    }
+    .type-cursor {
+  display: inline-block;
+  width: 1ch;
+  color: #aaf7ff;
+  animation: blink .93s steps(1) infinite;
+  font-size: 1em;
+  vertical-align: text-bottom;
+}
+@keyframes blink {
+  0%, 40%   { opacity: 1;}
+  60%,100%  { opacity: 0;}
+}
+
+    /* --- BACKGROUND WALL VIDEO STACK --- */
     .wall-bg-stack {
       position: absolute;
       top: 100vh; left: 0;
@@ -81,16 +128,13 @@
       background: #1a2342;
       pointer-events: none;
     }
-
-    /* --- MAIN SECTION with padding-top to not overlap the hero --- */
+    /* --- MAIN SECTION (SKILLS, ETC) --- */
     .main-bg-wrap {
       position: relative;
       min-height: 100vh;
       z-index: 1;
       padding-top: 0;
     }
-
-    /* --- SKILLS --- */
     .skill-box {
       max-width: 1320px;
       margin: 0 auto 80px auto;
@@ -104,20 +148,21 @@
       border: 2.5px solid #53eaff4a;
       transition: box-shadow .25s;
       backdrop-filter: blur(2px);
+      font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
     }
     .skill-box h2 {
       color: #89eaff;
       margin: 0 0 0.33em 0;
       text-align: center;
-      font-size: 2.15em;
+      font-size: 2.5em;
       letter-spacing: 0.06em;
-      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
       font-weight: 800;
       text-shadow: 0 2px 24px #0cf9ff38;
     }
     .skill-box .box-desc {
       color: #e3f7fa;
-      font-size: 1.17em;
+      font-size: 1.5em;
       margin-bottom: 2.3em;
       text-align: center;
       max-width: 700px;
@@ -227,12 +272,14 @@
       pointer-events: none;
     }
     @media (max-width: 900px) {
+      .about-me-section { font-size: 1em; }
       .skill-box { padding: 2.5em 0.4em 1.8em 0.4em;}
       .network-tree-container { width:99vw; height:900px;}
       .node, .node.core { min-width:100px; font-size:0.9em;}
       .subskills { min-width:90px; max-width: 200px;}
     }
     @media (max-width: 600px) {
+      .about-me-section { font-size: 0.9em; }
       .skill-box { padding: 1.5em 0.1em 1.1em 0.1em;}
       .network-tree-container { width:99vw; height:1180px;}
       .node, .node.core { min-width:65px; font-size:0.85em;}
@@ -251,6 +298,13 @@
     <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
     <div class="landing-name">Farid Zandi's Portfolio</div>
   </div>
+
+ <!-- ABOUT ME SECTION -->
+<div class="about-me-section" id="about">
+  <h2>About Me</h2>
+  <div id="aboutme-typing"></div>
+</div>
+
 
   <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
   <div class="wall-bg-stack" id="wallBgStack"></div>
@@ -295,8 +349,7 @@
       const vh = window.innerHeight;
       const main = document.querySelector('.main-bg-wrap');
       const container = document.getElementById('wallBgStack');
-      container.innerHTML = ''; // Remove old
-      // How many videos needed?
+      container.innerHTML = '';
       const mainHeight = main.offsetHeight;
       const stackCount = Math.ceil(mainHeight / vh) + 2;
       for (let i = 0; i < stackCount; i++) {
@@ -371,5 +424,48 @@
       document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
     });
   </script>
+ <script>
+  // No blinking cursor, no "_" char, just clean typing
+  const aboutParagraphs = [
+    `Well, what can I say? <strong>Game development has been a part of my life for over four years now!</strong><br>What started as a fun side project with fellow computer engineering and artist friends has grown into my professional passion.`,
+    `I began my gamedev journey by co-founding a small studio called <strong>Fake Reality</strong>. After taking a short break, I joined another team at <strong>FrostByte</strong>. Over the years, I've specialized mostly in game programming—using <strong>C#</strong>, <strong>C++</strong>, and <strong>GDScript</strong> in engines like <strong>Unity</strong>, <strong>Unreal Engine 5</strong>, and <strong>Godot</strong>. Along the way, I've gained hands-on experience in <strong>game design</strong>, <strong>level design</strong>, <strong>UI/UX</strong>, and <strong>world building</strong>.`,
+    `But honestly? I can’t get enough of this world. Facing its unlimited possibilities always brings a smile to my face.`
+  ];
+  const typeSpeed = 15; // ms per character
+  const paragraphPause = 700; // ms between paragraphs
+
+  function typeHtml(text, parent, cb) {
+    let i = 0;
+    let tag = false;
+    let current = "";
+    function type() {
+      if (i < text.length) {
+        if (text[i] === "<") tag = true;
+        current += text[i];
+        if (text[i] === ">" && tag) tag = false;
+        if (!tag) parent.innerHTML = current;
+        i++;
+        setTimeout(type, typeSpeed);
+      } else {
+        parent.innerHTML = current;
+        if (cb) setTimeout(cb, paragraphPause);
+      }
+    }
+    type();
+  }
+
+  function typeParagraphs(paragraphs, container, i=0) {
+    if (i >= paragraphs.length) return;
+    let p = document.createElement('p');
+    p.style.marginBottom = "1.1em";
+    container.appendChild(p);
+    typeHtml(paragraphs[i], p, () => typeParagraphs(paragraphs, container, i+1));
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    typeParagraphs(aboutParagraphs, document.getElementById('aboutme-typing'));
+  });
+</script>
+
 </body>
 </html>
