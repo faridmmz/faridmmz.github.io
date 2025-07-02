@@ -173,6 +173,100 @@
   }
 }
 
+.contact-section {
+  max-width: 1320px;                /* Match skill and about me box */
+  margin: 0 auto 80px auto;
+  border-radius: 26px;
+  padding: 3.5em 2.2em 2.6em 2.2em;
+  background: linear-gradient(120deg,rgba(23,31,52,1) 85%,rgba(36,65,100,1) 100%);
+  box-shadow: 0 4px 28px #0cf9ff25, 0 2px 10px #222c5231;
+  border: 2.5px solid #53eaff4a;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  color: #eaffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    position: relative;
+  z-index: 4;
+}
+
+.contact-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.2em;
+  font-size: 2.5em;
+  color: #72eaff;
+  letter-spacing: 0.07em;
+  font-weight: 800;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  text-shadow: 0 2px 12px #0cf9ff33;
+}
+
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.7em 2.6em;
+  width: 100%;
+  max-width: 980px;
+  justify-items: center;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.6em 1.2em 0.6em 0.6em;
+  background: rgba(16,30,44,0.98);   /* Less transparent for more contrast */
+  border-radius: 14px;
+  text-decoration: none;
+  color: #aaf7ff;
+  font-size: 1.16em;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  font-weight: 700;
+  transition: background 0.18s, box-shadow 0.18s, border 0.18s;
+  box-shadow: 0 1.5px 10px #0cf9ff1f;
+  border: 1.7px solid transparent;
+  min-width: 0;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 340px;
+}
+.contact-item:hover {
+  background: #182845;
+  color: #fff;
+  border: 1.5px solid #21dbff;
+  box-shadow: 0 4px 16px #16dbff44;
+}
+
+.contact-icon {
+  width: 1.6em;
+  height: 1.6em;
+  min-width: 1.6em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 2px #42fff988);
+}
+
+@media (max-width: 1000px) {
+  .contact-list {
+    max-width: 100vw;
+    gap: 1em 1em;
+  }
+  .contact-item {
+    font-size: 1em;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 800px) {
+  .contact-section { padding: 2em 0.7em 1.6em 0.7em; }
+  .contact-list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .contact-section { padding: 1em 0.1em; }
+  .contact-list { grid-template-columns: 1fr; gap: 0.7em; }
+}
+
+
 
     /* --- BACKGROUND WALL VIDEO STACK --- */
     .wall-bg-stack {
@@ -370,6 +464,37 @@
     <img src="Me.jpg" alt="Farid Zandi" class="about-me-img" />
   </div>
   <div id="aboutme-typing"></div>
+</div>
+
+ <!-- Contacts SECTION -->
+<div class="contact-section" id="contact">
+  <h2>Contact</h2>
+  <div class="contact-list">
+    <a href="mailto:faridmmz79@gmail.com" class="contact-item" title="Email">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 20v-9.99l7.88 7.11c.22.2.51.29.8.29.29 0 .58-.09.8-.29L20 10.01V20H4z"/></svg>
+      faridmmz79@gmail.com
+    </a>
+    <a href="https://github.com/faridmmz" target="_blank" class="contact-item" title="GitHub">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M12 2C6.477 2 2 6.486 2 12.021c0 4.43 2.865 8.187 6.839 9.504.5.092.682-.217.682-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.033 1.532 1.033.892 1.53 2.341 1.089 2.91.834.091-.647.349-1.089.635-1.34-2.22-.253-4.555-1.114-4.555-4.956 0-1.094.39-1.988 1.029-2.688-.103-.253-.446-1.272.099-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.6 9.6 0 0 1 2.505.337c1.909-1.296 2.748-1.026 2.748-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.851-2.338 4.7-4.566 4.949.359.309.678.917.678 1.849 0 1.336-.012 2.417-.012 2.747 0 .268.18.579.688.482C19.138 20.206 22 16.449 22 12.021 22 6.486 17.523 2 12 2z"/></svg>
+      github.com/faridmmz
+    </a>
+    <a href="Momtaz Zandi_Faridreza_CV.pdf" class="contact-item" title="Download CV" target="_blank">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M6 2a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8.83a2 2 0 0 0-.59-1.41l-5.83-5.83A2 2 0 0 0 14.17 2H6zm6 2v6h6l-6-6zm-4 14v-2h8v2H8zm0-4v-2h8v2H8z"/></svg>
+      Download CV
+    </a>
+    <a href="tel:+393791540436" class="contact-item" title="Call or WhatsApp">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M6.62 10.79a15.09 15.09 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24c1.09.36 2.27.55 3.48.55a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1A17 17 0 0 1 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.21.19 2.39.55 3.48a1 1 0 0 1-.24 1l-2.19 2.31z"/></svg>
+      +39&nbsp;379&nbsp;154&nbsp;0436
+    </a>
+    <a href="https://linkedin.com/in/faridreza-momtazandi/" target="_blank" class="contact-item" title="LinkedIn">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M6.94 5.5a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm-1.89 2.64h3.79V21H5.05V8.14zM10.89 8.14h3.63v1.76h.05c.5-.95 1.72-1.94 3.53-1.94 3.78 0 4.48 2.49 4.48 5.74V21h-3.8v-6.04c0-1.44-.03-3.29-2-3.29-2 0-2.3 1.56-2.3 3.18V21h-3.79V8.14z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://t.me/farid_mmz" target="_blank" class="contact-item" title="Telegram">
+      <svg class="contact-icon" viewBox="0 0 24 24"><path fill="#aaf7ff" d="M22.54 3.85l-3.19 15.07c-.24 1.07-.86 1.34-1.74.83l-4.81-3.55-2.32 2.24c-.26.26-.47.47-.97.47l.35-4.96 9.04-8.18c.39-.34-.09-.53-.6-.19l-11.2 7.06-4.82-1.51c-1.05-.33-1.07-1.05.22-1.56L21.1 3.18c.97-.35 1.83.22 1.44 1.67z"/></svg>
+      Telegram Account
+    </a>
+  </div>
 </div>
 
 
