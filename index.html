@@ -64,24 +64,24 @@
 
     /* --- ABOUT ME SECTION --- */
     .about-me-section {
-      width: 100vw;
-      max-width: 700px;
-      margin: -70px auto 60px auto; /* Overlap slightly under landing */
-      padding: 2.5em 1.7em 2.5em 1.7em;
-      background: linear-gradient(120deg,rgba(23,31,52,0.98) 85%,rgba(36,65,100,0.98) 100%);
-      border-radius: 22px;
-      box-shadow: 0 4px 28px #0cf9ff25, 0 2px 10px #222c5231;
-      text-align: center;
-      z-index: 4;
-      position: relative;
-      font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
-      font-size: 1.5em;
-      color: #eaffff;
-      letter-spacing: 0.04em;
-      line-height: 1.55;
-      opacity: 0.99;
-      border: 2px solid #25546f38;
-    }
+    max-width: 1320px;         /* Match skill box width */
+    margin: 0px auto 80px auto; /* Top margin for space from landing */
+    border-radius: 26px;        /* Match skill box */
+    padding: 3.5em 2.2em 2.6em 2.2em; /* Match skill box */
+    background: linear-gradient(120deg,rgba(23,31,52,0.98) 85%,rgba(36,65,100,0.98) 100%);
+    box-shadow: 0 4px 28px #0cf9ff25, 0 2px 10px #222c5231;
+    text-align: center;
+    z-index: 4;
+    position: relative;
+    font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.5em;
+    color: #eaffff;
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+    opacity: 0.99;
+    border: 2.5px solid #53eaff4a;  /* Match skill box border thickness */
+  }
+
     .about-me-section h2 {
       margin-top: 0;
       margin-bottom: 0.5em;
@@ -312,7 +312,7 @@
   <!-- SKILLS + MAIN CONTENT -->
   <div class="main-bg-wrap">
     <div class="skill-box">
-      <h2>My Skill Network</h2>
+      <h2>My Skill Tree!</h2>
       <div class="box-desc">
         This interactive skill graph maps out my core programming, game development, AI, and teamwork abilities.<br>
         Click on any skill category to explore my detailed expertise.
@@ -411,11 +411,18 @@
         drop.style.transform = "translateX(-50%)";
       }
       node.addEventListener("click", e => {
-        e.stopPropagation();
+      e.stopPropagation();
+      // If this dropdown is already open, close it (toggle off)
+      if (drop.classList.contains('open')) {
+        drop.classList.remove('open');
+      } else {
+        // Close all others, open this one
         document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
         positionDropdown();
-        drop.classList.toggle('open');
-      });
+        drop.classList.add('open');
+      }
+    });
+
       window.addEventListener('resize', () => {
         if (drop.classList.contains('open')) positionDropdown();
       });
@@ -426,8 +433,8 @@
   </script>
 <script>
   const aboutParagraphs = [
-    `Well, what can I say? <strong>Game development has been a part of my life for over half a decade now!</strong><br>What started as a fun side project with fellow computer engineering and artist friends has grown into my professional passion.`,
-    `I began my gamedev journey by co-founding a small studio called <strong>Fake Reality</strong>. After taking a short break, I joined another team at <strong>FrostByte</strong>. Over the years, I've specialized mostly in <strong>Game Programming</strong>—using <strong>C#</strong>, <strong>C++</strong>, and <strong>GDScript</strong> in engines like <strong>Unity</strong>, <strong>Unreal Engine 5</strong>, and <strong>Godot</strong>. Along the way, I've gained hands-on experience in <strong>Game Design</strong>, <strong>Level Design</strong>, <strong>UI/UX</strong>, and <strong>World Building</strong>.`,
+    `Well, what can I say? <strong>Game development has been a part of my life for over half a decade now!</strong>. What started as a fun side project with fellow computer engineering and artist friends has grown into my professional passion.`,
+    `I started out by co-founding <strong>Fake Reality</strong>, then joined <strong>FrostByte</strong>. My main focus is <strong>Game Programming</strong>—using <strong>C#</strong>, <strong>C++</strong>, and <strong>GDScript</strong> in <strong>Unity</strong>, <strong>Unreal Engine 5</strong>, and <strong>Godot</strong>. I've also gained hands-on experience in <strong>Game Design</strong>, <strong>Level Design</strong>, <strong>UI/UX</strong>, and <strong>World Building</strong>.`,
     `But honestly? I can’t get enough of this world. Facing its unlimited possibilities always brings a smile to my face.`
   ];
   const typeSpeed = 15;
