@@ -527,25 +527,24 @@
   flex-wrap: wrap;
   margin-top: 0.8em;
 }
-
 .game-thumb {
   max-width: 142px;
-  width: 100%;
+  max-height: 100px;
+  width: auto;
   height: auto;
-  aspect-ratio: 142/100;
   object-fit: contain;
   border-radius: 11px;
   box-shadow: 0 2px 10px #0cf9ff28, 0 1px 6px #19385299;
   border: 2px solid #4bdaff50;
   background: #23355a;
-  transition: transform 0.19s, border-color 0.19s;
+  transition: transform 0.19s;
   cursor: pointer;
 }
-
 .game-thumb:hover {
   transform: scale(1.06) rotate(-2deg);
   border-color: #72eaff;
 }
+
 
 @media (max-width: 900px) {
   .game-entry { flex-direction: column; align-items: center; }
@@ -656,17 +655,24 @@ ExoBarrier is a 2D tower defense game where players must manage resources, deplo
       <div><b>Tech Used:</b> Unity, C#, Photoshop</div>
     </div>
     <div class="game-images">
-      <img src="ExoBarrier Cover.png" alt="ExoBarrier Cover" class="game-thumb">
-      <img src="ExoBarrier Shop.png" alt="ExoBarrier Shop" class="game-thumb">
-      <img src="ExoBarrier Turrets.png" alt="ExoBarrier Turrets" class="game-thumb">
-    </div>
+  <img src="ExoBarrier Cover.png" alt="ExoBarrier Cover" class="game-thumb">
+  <img src="ExoBarrier Shop.png" alt="ExoBarrier Shop" class="game-thumb">
+  <img src="ExoBarrier Turrets.png" alt="ExoBarrier Turrets" class="game-thumb">
+</div>
+
   </div>
 </section>
 
 <!-- Modal for image zoom -->
-<div id="img-modal" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100vw; height:100vh; background:rgba(10,22,42,0.93); align-items:center; justify-content:center;">
-  <img id="modal-img" src="" alt="" style="max-width:90vw; max-height:88vh; border-radius:18px; box-shadow:0 8px 36px #0cf9ff55;">
+<div id="imgModal" style="
+  display:none;
+  position:fixed;z-index:99;top:0;left:0;width:100vw;height:100vh;
+  background:rgba(10,18,33,0.93);
+  justify-content:center;align-items:center;">
+  <img id="imgModalImg" src="" alt="Game image" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 4px 32px #0cf9ff55;">
 </div>
+
+
 
   </div>
 
@@ -903,26 +909,42 @@ ExoBarrier is a 2D tower defense game where players must manage resources, deplo
   });
 </script>
 <script>
-  // Click to zoom images in .game-cover and .game-thumb
-  document.querySelectorAll('.game-cover, .game-thumb').forEach(img => {
-    img.addEventListener('click', function() {
-      const modal = document.getElementById('img-modal');
-      const modalImg = document.getElementById('modal-img');
-      modalImg.src = img.src;
-      modalImg.alt = img.alt;
-      modal.style.display = 'flex';
-      // Prevent scroll behind modal
-      document.body.style.overflow = "hidden";
-    });
+ // Click any .game-cover or .game-thumb to open modal
+document.querySelectorAll('.game-cover, .game-thumb').forEach(img => {
+  img.addEventListener('click', function () {
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('imgModalImg');
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
   });
+});
 
-  // Hide modal on click anywhere
-  document.getElementById('img-modal').addEventListener('click', function() {
-    this.style.display = 'none';
-    document.body.style.overflow = "";
-    document.getElementById('modal-img').src = "";
-  });
+// Close modal when clicking the background (not the image)
+document.getElementById('imgModal').addEventListener('click', function(e) {
+  this.style.display = 'none';
+});
+
+
+// ESC closes modal too
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.getElementById('imgModal').style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('imgModalImg').src = '';
+  }
+});
+
+
 </script>
+<div id="imgModal" style="
+  display:none;
+  position:fixed;z-index:99;top:0;left:0;width:100vw;height:100vh;
+  background:rgba(10,18,33,0.93);
+  justify-content:center;align-items:center;">
+  <img id="imgModalImg" src="" alt="Game image" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 4px 32px #0cf9ff55;">
+</div>
 
 
 
