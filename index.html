@@ -448,6 +448,26 @@
       .node.right { top:20%; left:75%;}
       .node.right2 { top:65%; left:75%;}
     }
+    .projects-header {
+  width: 100%;
+  max-width: 1320px;
+  margin: 70px auto 38px auto;
+  padding-left: 0.1em;
+  font-size: 2.7em;
+  font-weight: 900;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.06em;
+  color: #72eaff;
+  text-shadow: 0 2px 16px #0cf9ff55;
+  border-left: 8px solid #67eaffb0;
+  border-radius: 10px;
+  background: rgba(18,32,54,0.66);
+  box-sizing: border-box;
+  padding-top: 0.3em;
+  padding-bottom: 0.13em;
+  padding-right: 1.1em;
+}
+
 .game-entry {
   max-width: 1320px;
   margin: 0 auto 70px auto;
@@ -457,7 +477,7 @@
   box-shadow: 0 4px 28px #0cf9ff22, 0 2px 10px #222c5232;
   display: flex;
   gap: 2.8em;
-  align-items: flex-start;
+  align-items: center;
   border: 2.5px solid #53eaff4a;
   color: #eaffff;
   font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
@@ -465,36 +485,50 @@
   z-index: 4;
 }
 
+/* Make cover take 40%, details 60% */
 .game-cover-wrap {
+  flex-basis: 40%;
   flex-shrink: 0;
-  margin-right: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Remove margin-right */
+  margin-right: 0;
 }
 
 .game-cover {
-  max-width: 290px;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 29/31; /* fallback for browsers that support it */
-  object-fit: contain;
+  display: block;
+  max-width: 95%;        /* Responsive; tweak as you wish */
+  height: auto;          /* Keep aspect ratio */
   border-radius: 18px;
-  box-shadow: 0 4px 18px #13e9f935, 0 1.5px 7px #13274f50;
+  outline: 3.5px solid #72eaff;
+  outline-offset: 0;
   background: #1d2a44;
-  border: 3.5px solid #72eaff;
-  transition: transform 0.22s;
-  cursor: pointer;
+  box-shadow: 0 4px 18px #13e9f935, 0 1.5px 7px #13274f50;
+  transition: transform 0.22s, outline-color 0.22s;
+  object-fit: contain;
+  margin: 0;             /* No margin, no forced height! */
+  /* Optionally set a max-height so it doesn't overflow the box: */
+  max-height: 370px;     /* Adjust as needed */
 }
 
 .game-cover:hover {
   transform: scale(1.035) rotate(-2deg);
+  outline-color: #aaf7ff;
 }
 
+
+
 .game-details {
-  flex: 1;
+  flex-basis: 60%;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 1.15em;
+  min-width: 0;
 }
+
 
 .game-title {
   margin-top: 0;
@@ -528,30 +562,42 @@
   margin-top: 0.8em;
 }
 .game-thumb {
+  display: block;
   max-width: 142px;
   max-height: 100px;
   width: auto;
   height: auto;
-  object-fit: contain;
   border-radius: 11px;
-  box-shadow: 0 2px 10px #0cf9ff28, 0 1px 6px #19385299;
-  border: 2px solid #4bdaff50;
+  outline: 2.5px solid #4bdaff;
+  outline-offset: 0;
   background: #23355a;
-  transition: transform 0.19s;
-  cursor: pointer;
+  box-shadow: 0 2px 10px #0cf9ff28, 0 1px 6px #19385299;
+  transition: transform 0.19s, outline-color 0.19s;
+  object-fit: contain;
 }
+
 .game-thumb:hover {
   transform: scale(1.06) rotate(-2deg);
-  border-color: #72eaff;
+  outline-color: #72eaff;
 }
+
+
 
 
 @media (max-width: 900px) {
   .game-entry { flex-direction: column; align-items: center; }
-  .game-cover { width: 98vw; max-width: 420px; }
-  .game-details { align-items: center; text-align: center; }
-  .game-images { justify-content: center; }
+  .game-cover { max-width: 98vw; max-height: 260px; }
 }
+
+  .game-details {
+    align-items: center;
+    text-align: center;
+  }
+  .game-images {
+    justify-content: center;
+  }
+}
+
 
   </style>
   
@@ -642,10 +688,12 @@
       </div>
     </div>
      <!-- GAME: EXOBARRIER -->
+    <h2 class="projects-header">Selected Projects</h2>
+
 <section class="game-entry">
-  <div class="game-cover-wrap">
-    <img src="ExoBarrier GamePlay.png" alt="ExoBarrier Gameplay" class="game-cover">
-  </div>
+
+  <img src="ExoBarrier GamePlay.png" alt="ExoBarrier Gameplay" class="game-cover">
+ 
   <div class="game-details">
     <h2 class="game-title">ExoBarrier</h2>
     <p class="game-desc">
