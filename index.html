@@ -498,8 +498,9 @@
 
 .game-cover {
   display: block;
-  width: 100%;
-  max-width: 640px;  /* Or even larger if you want */
+  width: auto; 
+  height: auto;
+  max-width: 100%;  /* Or even larger if you want */
   height: auto;
   max-height: 520px; /* Optional: ensures it doesn't overflow vertically */
   border-radius: 18px;
@@ -585,10 +586,7 @@
 .project-img {
   transition: transform 0.36s cubic-bezier(.22,1.01,.35,1), opacity 0.22s;
 }
-.project-img.swapping {
-  transform: scale(0.9) rotate(-2deg);
-  opacity: 0.5;
-}
+
 
 
 
@@ -613,6 +611,39 @@
   .game-images {
     justify-content: center;
   }
+
+.project-img.swapping {
+  transform: scale(0.93) rotate(-2deg);
+  opacity: 0.18;
+  transition: transform 0.36s cubic-bezier(.22,1.01,.35,1), opacity 0.36s cubic-bezier(.22,1.01,.35,1);
+  will-change: transform, opacity;
+}
+
+.media-fadeout-clone {
+  position: absolute !important;
+  z-index: 50;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+  outline: inherit;
+  transition: transform 0.36s cubic-bezier(.22,1.01,.35,1), opacity 0.36s cubic-bezier(.22,1.01,.35,1);
+  will-change: transform, opacity;
+  opacity: 1;
+  transform: none;
+}
+.media-fadeout-clone.swapping {
+  transform: scale(0.93) rotate(-2deg);
+  opacity: 0.12;
+}
+.project-img.swapping-in {
+  animation: popinFadeIn 0.42s cubic-bezier(.22,1.01,.35,1);
+}
+@keyframes popinFadeIn {
+  0%   { opacity: 0; transform: scale(1.07) rotate(1deg);}
+  40%  { opacity: 0.6; }
+  100% { opacity: 1; transform: none;}
+}
 
 
 
@@ -708,9 +739,6 @@
     <h2 class="projects-header">Selected Projects</h2>
 
 <section class="game-entry">
-    <div class="game-cover-wrap">
-    <img src="ExoBarrier GamePlay.png" alt="ExoBarrier Gameplay" class="game-cover project-img">
-  </div>
   <div class="game-details">
     <h2 class="game-title">ExoBarrier</h2>
     <p class="game-desc">
@@ -727,7 +755,35 @@
       <img src="ExoBarrier Turrets.png" alt="ExoBarrier Turrets" class="game-thumb project-img">
     </div>
   </div>
+    <div class="game-cover-wrap">
+    <img src="ExoBarrier GamePlay.png" alt="ExoBarrier Gameplay" class="game-cover project-img">
+  </div>
+  
 </section>
+<section class="game-entry">
+  <div class="game-details">
+    <h2 class="game-title">Last Defence</h2>
+    <p class="game-desc">
+A 3D tower defense game where you defend the city using four distinct turret types, each with unique strengths and abilities. Enemies attack from all directions, and you’re assisted by an autonomous drone that hunts them down. Earn currency by defeating enemies, which you can use to purchase powerful new abilities. The game features level selection, a survival mode, and a deep turret upgrade system. As my most ambitious project, this game was developed by a four-person team at Fake Reality Game Studio.    <div class="game-meta">
+      <div><b>Role:</b> Lead Programmer, Game Designer, Level Designer, Game AI Programming</div>
+      <div><b>Tech Used:</b> Unity, C#, Photoshop, Blender</div>
+    </div>
+    <div class="game-images">
+<img src="Last Defence GamePlay.png" ... class="game-thumb project-img">
+<img src="Last Defence Turrets.png" ... class="game-thumb project-img">
+<img src="Last Defence Level Menu.png" ... class="game-thumb project-img">
+<img src="Last Defence Skill tree.png" ... class="game-thumb project-img">
+
+      <!-- Add a fifth image if desired -->
+    </div>
+  </div>
+  <div class="game-cover-wrap">
+<video src="Last Defence.mp4" poster="Last Defence GamePlay.png" class="game-cover project-img" controls muted playsinline loop></video>
+    <!-- poster fallback in case video can't load -->
+  </div>
+</section>
+
+
 
 
 <!-- Modal for image zoom -->
@@ -976,54 +1032,117 @@
   });
 </script>
 <script>
- // Click any .game-cover or .game-thumb to open modal
 document.querySelectorAll('.game-entry').forEach(entry => {
-  const cover = entry.querySelector('.game-cover');
-  const thumbs = entry.querySelectorAll('.game-thumb');
+  const coverWrap = entry.querySelector('.game-cover-wrap');
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener('click', function() {
-      // Animation start
-      cover.classList.add('swapping');
-      thumb.classList.add('swapping');
-
-      setTimeout(() => {
-        // Swap only src and alt
-        let tempSrc = cover.src;
-        let tempAlt = cover.alt;
-        cover.src = thumb.src;
-        cover.alt = thumb.alt;
-        thumb.src = tempSrc;
-        thumb.alt = tempAlt;
-
-        // Animation end
-        cover.classList.remove('swapping');
-        thumb.classList.remove('swapping');
-      }, 220);
+  function copyMediaAttributes(target, source) {
+    ['src','alt','title','poster','controls','muted','loop','autoplay','playsinline','preload'].forEach(attr=>{
+      if (source.hasAttribute && source.hasAttribute(attr)) target.setAttribute(attr, source.getAttribute(attr));
+      else target.removeAttribute(attr);
     });
-  });
-});
-
-
-
-
-// Close modal when clicking the background (not the image)
-document.getElementById('imgModal').addEventListener('click', function(e) {
-  this.style.display = 'none';
-});
-
-
-// ESC closes modal too
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    document.getElementById('imgModal').style.display = 'none';
-    document.body.style.overflow = '';
-    document.getElementById('imgModalImg').src = '';
+    ['controls','muted','loop','autoplay','playsInline'].forEach(prop=>{
+      if (typeof source[prop] !== "undefined") target[prop] = source[prop];
+    });
   }
-});
 
+  function swapMedia(cover, thumb) {
+  // 1. Create a clone that overlays exactly
+  const clone = cover.cloneNode(true);
+  clone.classList.add('media-fadeout-clone');
+  clone.style.left = (cover.offsetLeft) + "px";
+  clone.style.top = (cover.offsetTop) + "px";
+  clone.style.width = cover.offsetWidth + "px";
+  clone.style.height = cover.offsetHeight + "px";
+  clone.style.opacity = "1";
+  clone.style.transform = "none";
+  cover.parentElement.appendChild(clone);
+
+  // 2. Fade out the clone (nice and smooth!)
+  setTimeout(() => {
+    clone.classList.add('swapping');
+  }, 0);
+
+  const animDuration = 360; // match CSS transition
+
+  // 3. After fade, swap and animate new in
+  setTimeout(() => {
+    // Always create same element type for new cover and new thumb
+    const thumbTag = thumb.tagName.toLowerCase();
+    const coverTag = cover.tagName.toLowerCase();
+
+    // new cover = clone of thumb, new thumb = clone of cover
+    let newCover = thumb.cloneNode(false);
+    let newThumb = cover.cloneNode(false);
+
+    // Clean up classnames
+    newCover.className = cover.className.replace('game-thumb','game-cover');
+    newThumb.className = thumb.className.replace('game-cover','game-thumb');
+
+    // --- Force thumb to be a playing video if the cover was a video ---
+    if (coverTag === 'video') {
+      if (newThumb.tagName.toLowerCase() !== 'video') {
+        let vid = document.createElement('video');
+        ['src', 'poster'].forEach(attr => {
+          if (cover.hasAttribute(attr)) vid.setAttribute(attr, cover.getAttribute(attr));
+        });
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.className = newThumb.className;
+        newThumb = vid;
+      } else {
+        newThumb.muted = true;
+        newThumb.playsInline = true;
+        newThumb.autoplay = true;
+        newThumb.loop = true;
+        newThumb.controls = false;
+      }
+      setTimeout(() => { if (newThumb.play) newThumb.play().catch(()=>{}); }, 1);
+    }
+
+    if (thumbTag === 'video') {
+      newCover.controls = true;
+      newCover.muted = true;
+      newCover.playsInline = true;
+      newCover.autoplay = true;
+      newCover.loop = true;
+      setTimeout(() => { if (newCover.play) newCover.play().catch(()=>{}); }, 1);
+    }
+
+    newCover.classList.add('swapping-in');
+
+    cover.parentElement.replaceChild(newCover, cover);
+    thumb.parentNode.replaceChild(newThumb, thumb);
+
+    setTimeout(() => {
+      newCover.classList.remove('swapping-in');
+    }, 420);
+
+    // Remove the clone after swap
+    clone.parentElement.removeChild(clone);
+
+    bindAll();
+  }, animDuration);
+}
+
+
+
+  function bindAll() {
+    const cover = coverWrap.querySelector('.game-cover');
+    entry.querySelectorAll('.game-thumb').forEach(thumb => {
+      thumb.onclick = () => swapMedia(cover, thumb);
+    });
+  }
+
+  bindAll();
+});
 
 </script>
+
+
+
+
 <div id="imgModal" style="
   display:none;
   position:fixed;z-index:99;top:0;left:0;width:100vw;height:100vh;
