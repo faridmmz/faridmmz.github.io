@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Skill Network Tree</title>
   <style>
+    
     @font-face {
       font-family: 'Pixellari';
       src: url('Pixellari.ttf') format('truetype');
@@ -19,6 +20,68 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+    .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: rgba(14, 22, 38, 0.96);
+  width: 100vw;
+  padding: 0;
+  box-shadow: 0 2px 18px #0cf9ff22;
+  animation: headerFadeIn 1.1s cubic-bezier(.32,1.2,.34,.98);
+}
+@keyframes headerFadeIn {
+  0% { opacity: 0; transform: translateY(-24px);}
+  100% { opacity: 1; transform: none;}
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: 2.1em;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0.7em 1em 0.7em 1em;
+}
+
+.nav-link {
+  color: #aaf7ff;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.13em;
+  font-weight: 800;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.18s;
+  letter-spacing: 0.04em;
+  opacity: 0.92;
+  cursor: pointer;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -0.12em;
+  width: 100%;
+  height: 2.7px;
+  background: linear-gradient(90deg,#72eaff 50%,#16eaff 100%);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0.7);
+  transition: opacity 0.18s, transform 0.23s cubic-bezier(.33,1.2,.45,.91);
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+@media (max-width: 600px) {
+  .nav-bar { gap: 0.7em; font-size: 0.96em; }
+}
+
     /* --- HERO/LANDING --- */
     .hero-video-wrap {
       width: 100vw;
@@ -645,12 +708,69 @@
   100% { opacity: 1; transform: none;}
 }
 
+.final-note-bottom {
+  width: 100%;
+  max-width: 520px;
+  margin: 90px auto 38px auto; /* Extra space above for effect */
+  background: linear-gradient(90deg, rgba(22,40,70,0.99) 75%, rgba(39,103,145,0.96) 100%);
+  color: #92f3ff;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.13em;
+  border-radius: 13px;
+  padding: 1.1em 1.7em;
+  text-align: center;
+  box-shadow: 0 4px 22px #0cf9ff15;
+  opacity: 0;
+  pointer-events: none;
+  animation: finalNotePopIn 1.17s 1.3s cubic-bezier(.16,1.1,.32,1) forwards;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .final-note-bottom {
+    font-size: 0.97em;
+    padding: 0.7em 0.7em;
+    border-radius: 9px;
+    max-width: 95vw;
+  }
+}
+@keyframes finalNotePopIn {
+  0% { opacity: 0; transform: translateY(30px) scale(0.97);}
+  75% { opacity: 1; transform: translateY(-4px) scale(1.03);}
+  100% { opacity: 1; transform: none;}
+}
+.wave-emoji {
+  display: inline-block;
+  animation: wave 1.3s infinite;
+  font-size: 1.1em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+}
+@keyframes wave {
+  0%,100% { transform: rotate(0);}
+  20% { transform: rotate(-20deg);}
+  40% { transform: rotate(14deg);}
+  60% { transform: rotate(-8deg);}
+  80% { transform: rotate(4deg);}
+}
+
+
 
 
   </style>
   
 </head>
 <body>
+  <header class="site-header">
+  <nav class="nav-bar">
+    <a href="#about" class="nav-link">About Me</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href=".skill-box" class="nav-link">My Skill Tree</a>
+    <a href=".projects-header" class="nav-link">Selected Projects</a>
+  </nav>
+</header>
+
   <!-- HERO VIDEO AND NAME -->
   <div class="hero-video-wrap">
     <video src="Portfolio header.mp4" autoplay loop muted playsinline></video>
@@ -780,7 +900,7 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     </div>
   </div>
   <div class="game-cover-wrap">
-<video src="Last Defence.mp4" poster="Last Defence GamePlay.png" class="game-cover project-img" controls muted playsinline loop></video>
+<video src="Last Defence.mp4"  class="game-cover project-img" controls muted playsinline loop></video>
     <!-- poster fallback in case video can't load -->
   </div>
 </section>
@@ -830,6 +950,50 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <img src="Cesium UE5.png" alt="Cesium Unreal Engine 5 Map" class="game-cover project-img">
   </div>
 </section>
+<section class="game-entry">
+  <div class="game-details">
+    <h2 class="game-title">AI Abalone Game</h2>
+    <p class="game-desc">
+      This 3D project is a digital version of the classic two-player board game Abalone, built in Godot. It features an AI opponent that uses the Minimax algorithm with alpha-beta pruning, a custom evaluation function, forward pruning with the Search Beam method, and table transposition for efficient state caching. The AI makes strategic decisions and can play full matches against itself, showcasing deep search and advanced pruning techniques in a real-time game environment.
+    </p>
+    <div class="game-meta">
+      <div><b>Role:</b> Lead Programmer, AI Engineer</div>
+      <div><b>Tech Used:</b> Godot, GDScript</div>
+      <div style="margin-top:0.7em;">
+    <a href="https://github.com/faridmmz/AI-Abalone-Game-Project/tree/main" target="_blank"
+      style="display:inline-block; padding:0.37em 1.15em; margin-top:0.15em;
+      background:linear-gradient(90deg,#2191f3 60%,#1fe4c6 100%);
+      color:#fff; font-family:'Pixellari','Segoe UI',Arial,sans-serif;
+      font-size:1.12em; font-weight:800; border-radius:8px; text-decoration:none;
+      box-shadow:0 2px 10px #0cf9ff38,0 1px 7px #13274f50; transition:background .18s;">
+      🎮&nbsp;Repository Available on GitHub
+    </a>
+  </div>
+    </div>
+    <div class="game-images">
+      <img src="Abalone EndGame.jpg" alt="Abalone Endgame" class="game-thumb project-img">
+    </div>
+  </div>
+  <div class="game-cover-wrap">
+    <img src="Abalone Game.jpg" alt="AI Abalone Game Cover" class="game-cover project-img">
+  </div>
+</section>
+<section class="game-entry">
+  <div class="game-details">
+    <h2 class="game-title">Chromind</h2>
+    <p class="game-desc">
+      Chromind is a 3D hypercasual game designed to be fun, calm, and easy to learn. Players watch and memorize a cube’s movement pattern, then try to mimic it. The experience is elevated with soothing rain effects, a gentle soundtrack, and vibrant colors to fully immerse and relax the player.
+    </p>
+    <div class="game-meta">
+      <div><b>Role:</b> Lead Programmer, Game Designer</div>
+      <div><b>Tech Used:</b> Unity, C#, Photoshop</div>
+    </div>
+    
+  </div>
+  <div class="game-cover-wrap">
+    <video src="Chromind.mp4"  class="game-cover project-img" controls muted playsinline loop></video>
+  </div>
+</section>
 
 
 
@@ -848,6 +1012,43 @@ A 3D tower defense game where you defend the city using four distinct turret typ
   </div>
 
  
+<script>
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    let target = document.querySelector(this.getAttribute('href')) ||
+                 document.querySelector(this.getAttribute('href').replace('.', '#'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Highlight nav link on scroll
+const navLinks = document.querySelectorAll('.nav-link');
+const sectionMap = [
+  {selector:'#about',   link:navLinks[0]},
+  {selector:'#contact', link:navLinks[1]},
+  {selector:'.skill-box',link:navLinks[2]},
+  {selector:'.projects-header',link:navLinks[3]},
+];
+function highlightNav() {
+  let fromTop = window.scrollY + 100;
+  sectionMap.forEach(({selector,link}) => {
+    let section = document.querySelector(selector);
+    if (!section) return;
+    let top = section.getBoundingClientRect().top + window.scrollY;
+    let bottom = top + section.offsetHeight;
+    if (fromTop >= top && fromTop < bottom) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+}
+window.addEventListener('scroll', highlightNav);
+window.addEventListener('DOMContentLoaded', highlightNav);
+</script>
 
   <script>
     // Repeat the wall video background as tall as the page!
@@ -1083,98 +1284,107 @@ A 3D tower defense game where you defend the city using four distinct turret typ
 document.querySelectorAll('.game-entry').forEach(entry => {
   const coverWrap = entry.querySelector('.game-cover-wrap');
 
-  function copyMediaAttributes(target, source) {
-    ['src','alt','title','poster','controls','muted','loop','autoplay','playsinline','preload'].forEach(attr=>{
-      if (source.hasAttribute && source.hasAttribute(attr)) target.setAttribute(attr, source.getAttribute(attr));
-      else target.removeAttribute(attr);
-    });
-    ['controls','muted','loop','autoplay','playsInline'].forEach(prop=>{
-      if (typeof source[prop] !== "undefined") target[prop] = source[prop];
-    });
-  }
-
   function swapMedia(cover, thumb) {
-  // 1. Create a clone that overlays exactly
-  const clone = cover.cloneNode(true);
-  clone.classList.add('media-fadeout-clone');
-  clone.style.left = (cover.offsetLeft) + "px";
-  clone.style.top = (cover.offsetTop) + "px";
-  clone.style.width = cover.offsetWidth + "px";
-  clone.style.height = cover.offsetHeight + "px";
-  clone.style.opacity = "1";
-  clone.style.transform = "none";
-  cover.parentElement.appendChild(clone);
+    // 1. Fade out the current cover smoothly
+    const clone = cover.cloneNode(true);
+    clone.classList.add('media-fadeout-clone');
+    cover.parentElement.appendChild(clone);
+    setTimeout(() => clone.classList.add('swapping'), 0);
 
-  // 2. Fade out the clone (nice and smooth!)
-  setTimeout(() => {
-    clone.classList.add('swapping');
-  }, 0);
+    const animDuration = 360;
 
-  const animDuration = 360; // match CSS transition
+    // 2. Helper to build the correct swapped elements
+    function buildNewElements() {
+      const thumbTag = thumb.tagName.toLowerCase();
+      const coverTag = cover.tagName.toLowerCase();
 
-  // 3. After fade, swap and animate new in
-  setTimeout(() => {
-    // Always create same element type for new cover and new thumb
-    const thumbTag = thumb.tagName.toLowerCase();
-    const coverTag = cover.tagName.toLowerCase();
+      let newCover = thumb.cloneNode(false);
+      let newThumb = cover.cloneNode(false);
 
-    // new cover = clone of thumb, new thumb = clone of cover
-    let newCover = thumb.cloneNode(false);
-    let newThumb = cover.cloneNode(false);
+      // Clean up classnames
+      newCover.className = cover.className.replace('game-thumb','game-cover');
+      newThumb.className = thumb.className.replace('game-cover','game-thumb');
 
-    // Clean up classnames
-    newCover.className = cover.className.replace('game-thumb','game-cover');
-    newThumb.className = thumb.className.replace('game-cover','game-thumb');
-
-    // --- Force thumb to be a playing video if the cover was a video ---
-    if (coverTag === 'video') {
-      if (newThumb.tagName.toLowerCase() !== 'video') {
-        let vid = document.createElement('video');
-        ['src', 'poster'].forEach(attr => {
-          if (cover.hasAttribute(attr)) vid.setAttribute(attr, cover.getAttribute(attr));
-        });
-        vid.muted = true;
-        vid.playsInline = true;
-        vid.autoplay = true;
-        vid.loop = true;
-        vid.className = newThumb.className;
-        newThumb = vid;
-      } else {
-        newThumb.muted = true;
-        newThumb.playsInline = true;
-        newThumb.autoplay = true;
-        newThumb.loop = true;
-        newThumb.controls = false;
+      // If the new cover is a video, set playback attributes
+      if (thumbTag === 'video') {
+        newCover.controls = true;
+        newCover.muted = true;
+        newCover.playsInline = true;
+        newCover.autoplay = true;
+        newCover.loop = true;
+        newCover.removeAttribute('poster');
+        setTimeout(() => { if (newCover.play) newCover.play().catch(()=>{}); }, 1);
       }
-      setTimeout(() => { if (newThumb.play) newThumb.play().catch(()=>{}); }, 1);
+
+      // If the new thumb is a video, set it up as preview mode
+      if (coverTag === 'video') {
+        if (newThumb.tagName.toLowerCase() !== 'video') {
+          let vid = document.createElement('video');
+          ['src', 'poster'].forEach(attr => {
+            if (cover.hasAttribute(attr)) vid.setAttribute(attr, cover.getAttribute(attr));
+          });
+          vid.muted = true;
+          vid.playsInline = true;
+          vid.autoplay = true;
+          vid.loop = true;
+          vid.className = newThumb.className;
+          newThumb = vid;
+        } else {
+          newThumb.muted = true;
+          newThumb.playsInline = true;
+          newThumb.autoplay = true;
+          newThumb.loop = true;
+          newThumb.controls = false;
+        }
+        setTimeout(() => { if (newThumb.play) newThumb.play().catch(()=>{}); }, 1);
+      }
+
+      newCover.classList.add('swapping-in');
+      return { newCover, newThumb };
     }
 
-    if (thumbTag === 'video') {
-      newCover.controls = true;
-      newCover.muted = true;
-      newCover.playsInline = true;
-      newCover.autoplay = true;
-      newCover.loop = true;
-      setTimeout(() => { if (newCover.play) newCover.play().catch(()=>{}); }, 1);
+    // 3. Main swap function, called after preloading (or immediately for images)
+    function doSwap() {
+      const { newCover, newThumb } = buildNewElements();
+
+      cover.parentElement.replaceChild(newCover, cover);
+      thumb.parentNode.replaceChild(newThumb, thumb);
+
+      setTimeout(() => {
+        newCover.classList.remove('swapping-in');
+      }, 420);
+
+      // Remove the clone after swap
+      if (clone.parentElement) clone.parentElement.removeChild(clone);
+
+      bindAll(); // Re-bind events for the new nodes
     }
 
-    newCover.classList.add('swapping-in');
+    // 4. For videos, preload first to avoid gray/error flash
+    const thumbTag = thumb.tagName.toLowerCase();
+    if (thumbTag === "video") {
+      let preloader = document.createElement('video');
+      preloader.src = thumb.getAttribute('src');
+      preloader.muted = true;
+      preloader.playsInline = true;
+      preloader.autoplay = true;
+      preloader.loop = true;
+      preloader.style.display = 'none';
+      document.body.appendChild(preloader);
 
-    cover.parentElement.replaceChild(newCover, cover);
-    thumb.parentNode.replaceChild(newThumb, thumb);
+      preloader.addEventListener('canplay', function() {
+        document.body.removeChild(preloader);
+        setTimeout(doSwap, 0); // Small timeout to guarantee smoothness
+      }, { once: true });
 
-    setTimeout(() => {
-      newCover.classList.remove('swapping-in');
-    }, 420);
+      preloader.load();
+      // We return here! Swap only after preload is ready.
+      return;
+    }
 
-    // Remove the clone after swap
-    clone.parentElement.removeChild(clone);
-
-    bindAll();
-  }, animDuration);
-}
-
-
+    // 5. For images, swap after animation duration
+    setTimeout(doSwap, animDuration);
+  }
 
   function bindAll() {
     const cover = coverWrap.querySelector('.game-cover');
@@ -1185,8 +1395,8 @@ document.querySelectorAll('.game-entry').forEach(entry => {
 
   bindAll();
 });
-
 </script>
+
 
 
 
@@ -1197,6 +1407,36 @@ document.querySelectorAll('.game-entry').forEach(entry => {
   background:rgba(10,18,33,0.93);
   justify-content:center;align-items:center;">
   <img id="imgModalImg" src="" alt="Game image" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 4px 32px #0cf9ff55;">
+</div>
+
+
+<footer style="
+  max-width: 880px;
+  margin: 68px auto 36px auto;
+  padding: 2.2em 1em 1.6em 1em;
+  background: linear-gradient(110deg, #192846cc 70%, #174164cc 100%);
+  color: #aaf7ff;
+  border-radius: 18px;
+  text-align: center;
+  font-size: 1.28em;
+  font-family: 'Pixellari', 'Segoe UI', Arial, sans-serif;
+  box-shadow: 0 2px 18px #0cf9ff19, 0 1px 7px #13274f44;
+  border: 2px solid #53eaff36;
+  opacity: 0.98;
+">
+  <p style="margin-bottom: 0.4em; font-size:1.21em;">
+    <strong>Wow! Look at you reaching the end! Thank you for your time and sheer freaking will!</strong>
+  </p>
+  <p style="margin-bottom: 0;">
+    I truly appreciate your interest in my work and projects.<br>
+    If you have any feedback, want to collaborate, or just want to say hi, and specially if you want to say hi, don’t hesitate to contact me! 🚀
+  </p>
+</footer>
+
+
+<div class="final-note-bottom">
+  <span class="wave-emoji">👋</span>
+  You still scrolling? Well, if you're this interested, I'll try to add more soon!
 </div>
 
 
