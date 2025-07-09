@@ -1306,8 +1306,11 @@ window.addEventListener('resize', stackWallBg);
 <script>
 document.querySelectorAll('.game-entry').forEach(entry => {
   const coverWrap = entry.querySelector('.game-cover-wrap');
-
+let swapInProgress = false;
   function swapMedia(cover, thumb) {
+     if (swapInProgress) return; // prevent concurrent swaps
+  swapInProgress = true;
+document.querySelectorAll('.media-fadeout-clone').forEach(clone => clone.remove());
     // 1. Fade out the current cover smoothly
     const clone = cover.cloneNode(true);
     clone.classList.add('media-fadeout-clone');
@@ -1375,6 +1378,7 @@ document.querySelectorAll('.game-entry').forEach(entry => {
 
       setTimeout(() => {
         newCover.classList.remove('swapping-in');
+        swapInProgress = false;
       }, 420);
 
       // Remove the clone after swap
