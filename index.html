@@ -82,23 +82,30 @@
   .nav-bar { gap: 0.7em; font-size: 0.96em; }
 }
 
-    /* --- HERO/LANDING --- */
-    .hero-video-wrap {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      background: #101118;
-      overflow: hidden;
-      z-index: 2;
-    }
-    .hero-video-wrap video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      background: #101118;
-    }
+ /* General responsive video wrapper */
+.responsive-video-block {
+  width: 100vw;
+  aspect-ratio: 1836 / 818; /* ← match the real bg video exactly */
+  position: relative;
+  overflow: hidden;
+  background: #101118;
+  z-index: 2;
+  min-width: 0;
+  min-height: 0;
+}
+
+
+.responsive-video-block video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* <--- change to cover */
+  object-position: center;
+  display: block;
+  background: #101118;
+  pointer-events: none;
+}
+
+
     .landing-name {
       position: absolute;
       top: 48%; left: 50%;
@@ -333,22 +340,23 @@
 
     /* --- BACKGROUND WALL VIDEO STACK --- */
     .wall-bg-stack {
-      position: absolute;
-      top: 100vh; left: 0;
-      width: 100vw;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+  position: relative;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
     .wall-bg-stack video {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      opacity: 0.86;
-      background: #1a2342;
-      pointer-events: none;
-    }
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;      /* CHANGE cover -> contain */
+  object-position: center;
+  background: #1a2342;      /* fallback bg color */
+  pointer-events: none;
+}
+
     /* --- MAIN SECTION (SKILLS, ETC) --- */
     .main-bg-wrap {
       position: relative;
@@ -772,17 +780,14 @@
 </header>
 
   <!-- HERO VIDEO AND NAME -->
-  <div class="hero-video-wrap">
-    <video src="Portfolio header.mp4" 
-       autoplay 
-       loop 
-       muted 
-       playsinline
-       poster="Portfolio header first frame.png">
-</video>
+<!-- LANDING HERO VIDEO (first block) -->
+<div class="responsive-video-block hero-video-block">
+  <video src="Portfolio header.mp4"
+         poster="Portfolio header first frame.png"
+         autoplay loop muted playsinline></video>
+  <div class="landing-name">Farid Zandi's Portfolio</div>
+</div>
 
-    <div class="landing-name">Farid Zandi's Portfolio</div>
-  </div>
 
  <!-- ABOUT ME SECTION -->
 <div class="about-me-section" id="about">
@@ -828,7 +833,8 @@
 
 
   <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
-  <div class="wall-bg-stack" id="wallBgStack"></div>
+  <<div class="wall-bg-stack" id="wallBgStack" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></div>
+
 
   <!-- SKILLS + MAIN CONTENT -->
   <div class="main-bg-wrap">
@@ -1059,33 +1065,44 @@ window.addEventListener('DOMContentLoaded', highlightNav);
   <script>
     // Repeat the wall video background as tall as the page!
     function stackWallBg() {
-      const vh = window.innerHeight;
-      const main = document.querySelector('.main-bg-wrap');
-      const container = document.getElementById('wallBgStack');
-      container.innerHTML = '';
-      const mainHeight = main.offsetHeight;
-      const stackCount = Math.ceil(mainHeight / vh) + 2;
-      for (let i = 0; i < stackCount; i++) {
-        const vid = document.createElement('video');
-        vid.src = "Background.mp4";
-        vid.autoplay = true;
-        vid.loop = true;
-        vid.muted = true;
-        vid.playsInline = true;
-        vid.style.position = 'absolute';
-        vid.style.top = (i * 100) + "vh";
-        vid.style.left = '0';
-        vid.style.width = '100vw';
-        vid.style.height = '100vh';
-        vid.style.objectFit = 'cover';
-        vid.style.opacity = '0.86';
-        vid.style.pointerEvents = 'none';
-        container.appendChild(vid);
-      }
-      container.style.height = (stackCount * 100) + "vh";
-    }
-    window.addEventListener('DOMContentLoaded', stackWallBg);
-    window.addEventListener('resize', stackWallBg);
+  const main = document.querySelector('.main-bg-wrap');
+  const container = document.getElementById('wallBgStack');
+  container.innerHTML = '';
+
+  // Don't use display: none; use visibility + offscreen positioning
+  const block = document.createElement('div');
+  block.className = 'responsive-video-block';
+  block.style.visibility = 'hidden';
+  block.style.position = 'absolute';
+  block.style.left = '-9999px';
+  document.body.appendChild(block);
+  const blockHeight = block.offsetHeight;
+  document.body.removeChild(block);
+
+  // Compute number of blocks needed to fill .main-bg-wrap
+  const stackCount = Math.ceil(main.offsetHeight / blockHeight) + 2;
+  for (let i = 0; i < stackCount; i++) {
+    const block = document.createElement('div');
+    block.className = 'responsive-video-block';
+    const vid = document.createElement('video');
+    vid.src = "Background.mp4";
+    vid.autoplay = true;
+    vid.loop = true;
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.style.width = '100%';
+    vid.style.height = '100%';
+    vid.style.objectFit = 'cover';
+    vid.style.background = '#101118';
+    block.appendChild(vid);
+    container.appendChild(block);
+  }
+}
+window.addEventListener('DOMContentLoaded', stackWallBg);
+window.addEventListener('resize', stackWallBg);
+
+
+
 
     // Skill data:
     const data = {
