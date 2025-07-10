@@ -1037,6 +1037,23 @@ vid.autoplay = true;
 vid.loop = true;
 vid.playsInline = true;
 
+function tryPlayAllVideos() {
+  document.querySelectorAll('video').forEach(v => {
+    v.muted = true; // ensure muted!
+    if (v.paused) {
+      v.play().catch(()=>{});
+    }
+  });
+}
+
+// Try to play right away (for browsers that allow it)
+document.addEventListener('DOMContentLoaded', tryPlayAllVideos);
+
+// Fallback: play on first interaction (tap, click, scroll)
+window.addEventListener('touchend', tryPlayAllVideos, { once: true });
+window.addEventListener('mousedown', tryPlayAllVideos, { once: true });
+window.addEventListener('keydown', tryPlayAllVideos, { once: true });
+window.addEventListener('wheel', tryPlayAllVideos, { once: true });
  </script>
 <script>
 document.querySelectorAll('.nav-link').forEach(link => {
