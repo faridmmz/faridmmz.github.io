@@ -784,7 +784,7 @@
 <div class="responsive-video-block hero-video-block">
   <video src="Portfolio header.mp4"
          poster="Portfolio header first frame.png"
-         autoplay loop muted playsinline></video>
+         muted autoplay loop playsinline></video>
   <div class="landing-name">Farid Zandi's Portfolio</div>
 </div>
 
@@ -833,7 +833,7 @@
 
 
   <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
-  <<div class="wall-bg-stack" id="wallBgStack" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></div>
+  <div class="wall-bg-stack" id="wallBgStack" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></div>
 
 
   <!-- SKILLS + MAIN CONTENT -->
@@ -1024,18 +1024,7 @@ A 3D tower defense game where you defend the city using four distinct turret typ
   </div>
 
  <script>
-  const vid = document.createElement('video');
-vid.src = "Background.mp4";
-vid.muted = true; // set muted before autoplay!
-vid.autoplay = true;
-vid.loop = true;
-vid.playsInline = true;
-const vid = document.createElement('video');
-vid.src = "Portfolio header.mp4";
-vid.muted = true; // set muted before autoplay!
-vid.autoplay = true;
-vid.loop = true;
-vid.playsInline = true;
+ 
 
 function tryPlayAllVideos() {
   document.querySelectorAll('video').forEach(v => {
@@ -1116,10 +1105,10 @@ window.addEventListener('DOMContentLoaded', highlightNav);
     const block = document.createElement('div');
     block.className = 'responsive-video-block';
     const vid = document.createElement('video');
+        vid.muted = true;
     vid.src = "Background.mp4";
     vid.autoplay = true;
     vid.loop = true;
-    vid.muted = true;
     vid.playsInline = true;
     vid.style.width = '100%';
     vid.style.height = '100%';
