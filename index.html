@@ -339,11 +339,11 @@
   }
 }
 @media (max-width: 800px) {
-  .contact-section { padding: 2em 0.7em 1.6em 0.7em; }
+  .contact-section { padding: 2em 1.1em 1.6em 1.1em; }
   .contact-list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 500px) {
-  .contact-section { padding: 1.2em 0.8em; }
+  .contact-section { padding: 1.3em 1.1em; }
   .contact-list { grid-template-columns: 1fr; gap: 0.7em; }
 }
 
@@ -513,7 +513,7 @@
     }
     @media (max-width: 900px) {
       .about-me-section { font-size: 1em; }
-      .skill-box { padding: 2.5em 0.4em 1.8em 0.4em;}
+      .skill-box { padding: 2.5em 1em 1.8em 1em;}
       .skill-box h2 { font-size: 1.9em; }
       .skill-box .box-desc { font-size: 1.1em; padding: 0 0.4em; }
       .network-tree-container { width:99vw; height:900px;}
@@ -522,7 +522,7 @@
     }
     @media (max-width: 600px) {
       .about-me-section { font-size: 0.9em; }
-      .skill-box { padding: 1.5em 0.8em 1.1em 0.8em;}
+      .skill-box { padding: 1.5em 1.1em 1.1em 1.1em;}
       .skill-box h2 { font-size: 1.5em; }
       .skill-box .box-desc { font-size: 0.95em; }
       .network-tree-container { width:99vw; height:1180px;}
@@ -547,11 +547,12 @@
         max-width: 100%;
         height: auto;
         min-height: 0;
+        box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: auto;
-        gap: 1.7em 0.5em;
-        padding: 0.4em 0.5em 1.8em 0.5em;
+        gap: 1.7em 0.6em;
+        padding: 0.4em 0.9em 1.8em 0.9em;
       }
       .node, .node.core {
         position: static;
@@ -739,7 +740,7 @@
   .projects-header { font-size: 1.7em; margin: 50px auto 24px auto; padding-right: 0.5em; }
 }
 @media (max-width: 500px) {
-  .game-entry { padding: 1.4em 0.7em; gap: 1.4em; }
+  .game-entry { padding: 1.4em 1.1em; gap: 1.4em; }
   .game-title { font-size: 1.28em; }
   .game-desc { font-size: 0.96em; }
 }
