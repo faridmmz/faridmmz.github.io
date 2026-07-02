@@ -534,9 +534,9 @@
       .node.right { top:20%; left:75%;}
       .node.right2 { top:65%; left:75%;}
     }
-    /* On phones the spatial node graph + hand-drawn SVG connector lines can't
-       be meaningfully rescaled to a tall portrait viewport, so switch to a
-       simple stacked list instead. */
+    /* On phones, nodes flow top-to-bottom in a zig-zag instead of the fixed
+       desktop grid; the connector lines are recomputed in JS (updateSkillLines)
+       from each node's real rendered position, so they always line up. */
     @media (max-width: 700px) {
       .network-tree-container {
         width: 100%;
@@ -545,41 +545,41 @@
         min-height: 0;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
-        gap: 0.6em;
-        padding: 0.3em 0.2em;
+        align-items: center;
+        gap: 0.9em;
+        padding: 0.4em 3%;
       }
-      .network-lines { display: none; }
       .node, .node.core {
         position: static;
-        width: 100%;
-        min-width: 0;
-        max-width: none;
+        width: auto;
+        min-width: 150px;
+        max-width: 72%;
         box-sizing: border-box;
-        font-size: 1em;
+        font-size: 0.92em;
         margin: 0;
       }
+      .node.core { order: 1; align-self: center; }
+      #cat-programming { order: 2; align-self: flex-start; }
+      #skills-programming { order: 3; }
+      #cat-engines { order: 4; align-self: flex-end; }
+      #skills-engines { order: 5; }
+      #cat-soft { order: 6; align-self: flex-start; }
+      #skills-soft { order: 7; }
+      #cat-ai { order: 8; align-self: flex-start; margin-left: 14%; }
+      #skills-ai { order: 9; }
+      #cat-gamedev { order: 10; align-self: flex-end; }
+      #skills-gamedev { order: 11; }
       .subskills {
         position: static;
         transform: none !important;
-        width: 100%;
+        width: 86%;
         min-width: 0;
         max-width: none;
         box-sizing: border-box;
         border-radius: 0.9em;
-        margin: 0 0 0.3em 0;
+        margin: 0;
+        align-self: center;
       }
-      .node.core { order: 1; }
-      #cat-programming { order: 2; }
-      #skills-programming { order: 3; }
-      #cat-engines { order: 4; }
-      #skills-engines { order: 5; }
-      #cat-soft { order: 6; }
-      #skills-soft { order: 7; }
-      #cat-ai { order: 8; }
-      #skills-ai { order: 9; }
-      #cat-gamedev { order: 10; }
-      #skills-gamedev { order: 11; }
     }
     .projects-header {
   width: 100%;
@@ -1307,6 +1307,7 @@ window.addEventListener('resize', stackWallBg);
         positionDropdown();
         drop.classList.add('open');
       }
+      updateSkillLines(); // opening/closing a dropdown reflows sibling nodes on mobile
     });
 
       window.addEventListener('resize', () => {
@@ -1315,7 +1316,41 @@ window.addEventListener('resize', stackWallBg);
     });
     document.body.addEventListener("click", () => {
       document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
+      updateSkillLines();
     });
+
+    // Redraw the connector lines from each node's real rendered position, so the
+    // graph stays correct whether nodes are absolutely positioned (desktop) or
+    // flowing top-to-bottom in a zig-zag (mobile, see the 700px media query above).
+    function updateSkillLines() {
+      const svg = document.querySelector('.network-lines');
+      const container = document.querySelector('.network-tree-container');
+      if (!svg || !container) return;
+      const w = container.clientWidth, h = container.clientHeight;
+      if (!w || !h) return;
+      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+      const center = el => ({ x: el.offsetLeft + el.offsetWidth / 2, y: el.offsetTop + el.offsetHeight / 2 });
+      const core = document.querySelector('.node.core');
+      const prog = document.getElementById('cat-programming');
+      const eng  = document.getElementById('cat-engines');
+      const soft = document.getElementById('cat-soft');
+      const ai   = document.getElementById('cat-ai');
+      const game = document.getElementById('cat-gamedev');
+      const pairs = [[core, prog], [core, eng], [core, soft], [prog, ai], [prog, game], [eng, game]];
+      const lines = svg.querySelectorAll('line');
+      pairs.forEach(([a, b], i) => {
+        if (!a || !b || !lines[i]) return;
+        const ca = center(a), cb = center(b);
+        lines[i].setAttribute('x1', ca.x);
+        lines[i].setAttribute('y1', ca.y);
+        lines[i].setAttribute('x2', cb.x);
+        lines[i].setAttribute('y2', cb.y);
+      });
+    }
+    window.addEventListener('DOMContentLoaded', () => { updateSkillLines(); setTimeout(updateSkillLines, 300); });
+    window.addEventListener('load', updateSkillLines);
+    window.addEventListener('resize', updateSkillLines);
   </script>
 <script>
   const aboutParagraphs = [
