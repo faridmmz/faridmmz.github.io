@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Farid Zandi's Portfolio</title>
   <style>
     
@@ -81,6 +82,9 @@
 @media (max-width: 600px) {
   .nav-bar { gap: 0.7em; font-size: 0.96em; }
 }
+@media (max-width: 420px) {
+  .nav-bar { flex-wrap: wrap; gap: 0.5em 0.9em; font-size: 0.85em; padding: 0.6em 0.6em; }
+}
 
  /* General responsive video wrapper */
 .responsive-video-block {
@@ -129,7 +133,10 @@
       to   { opacity: 1; transform: translate(-50%, -50%) scale(1);}
     }
     @media (max-width: 600px) {
-      .landing-name { font-size: 2em; }
+      .landing-name { font-size: 1.7em; }
+    }
+    @media (max-width: 400px) {
+      .landing-name { font-size: 1.2em; white-space: normal; width: 92vw; }
     }
 
     /* --- ABOUT ME SECTION --- */
@@ -223,6 +230,10 @@
   }
   #aboutme-typing {
     text-align: center;
+  }
+  .about-me-img {
+    width: 160px;
+    height: 160px;
   }
 }
 
@@ -503,6 +514,8 @@
     @media (max-width: 900px) {
       .about-me-section { font-size: 1em; }
       .skill-box { padding: 2.5em 0.4em 1.8em 0.4em;}
+      .skill-box h2 { font-size: 1.9em; }
+      .skill-box .box-desc { font-size: 1.1em; padding: 0 0.4em; }
       .network-tree-container { width:99vw; height:900px;}
       .node, .node.core { min-width:100px; font-size:0.9em;}
       .subskills { min-width:90px; max-width: 200px;}
@@ -510,6 +523,8 @@
     @media (max-width: 600px) {
       .about-me-section { font-size: 0.9em; }
       .skill-box { padding: 1.5em 0.1em 1.1em 0.1em;}
+      .skill-box h2 { font-size: 1.5em; }
+      .skill-box .box-desc { font-size: 0.95em; }
       .network-tree-container { width:99vw; height:1180px;}
       .node, .node.core { min-width:65px; font-size:0.85em;}
       .subskills { min-width:60px; max-width: 170px;}
@@ -663,7 +678,7 @@
 
 
 @media (max-width: 900px) {
-  .game-entry { flex-direction: column; }
+  .game-entry { flex-direction: column; padding: 1.8em 1.1em; }
   .game-cover-wrap, .game-details {
     flex-basis: 100% !important;
     max-width: 100vw;
@@ -672,6 +687,15 @@
     max-width: 96vw;
     max-height: 260px;
   }
+  .game-title { font-size: 1.5em; }
+  .game-desc { font-size: 1.02em; }
+  .game-thumb { max-width: 100px; max-height: 76px; }
+  .projects-header { font-size: 1.7em; margin: 50px auto 24px auto; padding-right: 0.5em; }
+}
+@media (max-width: 500px) {
+  .game-entry { padding: 1.4em 0.7em; gap: 1.4em; }
+  .game-title { font-size: 1.28em; }
+  .game-desc { font-size: 0.96em; }
 }
 
 
@@ -741,6 +765,12 @@
     padding: 0.7em 0.7em;
     border-radius: 9px;
     max-width: 95vw;
+  }
+  .site-footer {
+    max-width: 94vw !important;
+    padding: 1.4em 0.8em 1.1em 0.8em !important;
+    font-size: 1em !important;
+    margin: 44px auto 28px auto !important;
   }
 }
 @keyframes finalNotePopIn {
@@ -876,7 +906,7 @@
         <h2 class="game-title">LingoLooper</h2>
         <p class="game-desc">
           <strong>LingoLooper</strong> is an AI-powered conversational language-learning game with over 500K+ users! As an AI/Unity Developer Intern, I jumped directly into full-stack production, shipping core features and game infrastructure across the entire platform—from front-end interactive Unity UI panels to robust ASP.NET Core backend endpoints and React admin dashboard tools.<br><br>
-          My main focus was engineering the game's **Contextual AI Pipelines**, where I developed a real-time emotion detection system that captures player vocal tone to dynamically modify character responses and animations. Alongside gameplay features, I integrated distributed tracing pipelines to monitor live AI conversation quality, optimized automated email pipelines for massive player-base recaps, and maintained clean codebase health.
+          My main focus was engineering the game's Contextual AI Pipelines, where I developed a real-time emotion detection system that captures player vocal tone to dynamically modify character responses and animations. Alongside gameplay features, I integrated distributed tracing pipelines to monitor live AI conversation quality, optimized automated email pipelines for massive player-base recaps, and maintained clean codebase health.
         </p>
         <div class="game-meta">
           <div><b>Role:</b> AI / Unity Developer Intern</div>
@@ -929,13 +959,12 @@
   <div class="game-cover-wrap">
     <img src="M.A.R.S Main Dashboard.png" alt="M.A.R.S Main Dashboard" class="game-cover project-img">
   </div>
-</section></section>
-<section class="game-entry"id="exobarrier">
+</section>
+<section class="game-entry" id="exobarrier">
   <div class="game-details">
     <h2 class="game-title">ExoBarrier</h2>
     <p class="game-desc">
-      ExoBarrier is a 2D tower defense game where players must manage resources, deploy and upgrade a variety of turret types, and defend against waves of enemies attacking from all sides. Strategic decisions include positioning, upgrading, moving, and reloading turrets in real time. The game features vibrant pixel art created by my talented colleague and friend at FrostByte Game Studio.    </p>
-
+      ExoBarrier is a 2D tower defense game where players must manage resources, deploy and upgrade a variety of turret types, and defend against waves of enemies attacking from all sides. Strategic decisions include positioning, upgrading, moving, and reloading turrets in real time. The game features vibrant pixel art created by my talented colleague and friend at FrostByte Game Studio.
     </p>
     <div class="game-meta">
       <div><b>Role:</b> Lead Programmer, Game Designer, Level Designer</div>
@@ -957,16 +986,17 @@
     <h2 class="game-title">Last Defence</h2>
     <p class="game-desc">
 A 3D tower defense game where you defend the city using four distinct turret types, each with unique strengths and abilities. Enemies attack from all directions, and you’re assisted by an autonomous drone that hunts them down. Earn currency by defeating enemies, which you can use to purchase powerful new abilities. The game features level selection, a survival mode, and a deep turret upgrade system.<br><br>
- As my most ambitious project, this game was developed by a four-person team at Fake Reality Game Studio.    
-<div class="game-meta">
+ As my most ambitious project, this game was developed by a four-person team at Fake Reality Game Studio.
+    </p>
+    <div class="game-meta">
       <div><b>Role:</b> Lead Programmer, Game Designer, Level Designer, Gameplay AI</div>
       <div><b>Tech Used:</b> Unity, C#, Photoshop, Blender</div>
     </div>
     <div class="game-images">
-<img src="Last Defence GamePlay.png" ... class="game-thumb project-img">
-<img src="Last Defence Turrets.png" ... class="game-thumb project-img">
-<img src="Last Defence Level Menu.png" ... class="game-thumb project-img">
-<img src="Last Defence Skill tree.png" ... class="game-thumb project-img">
+<img src="Last Defence GamePlay.png" alt="Last Defence Gameplay" class="game-thumb project-img">
+<img src="Last Defence Turrets.png" alt="Last Defence Turrets" class="game-thumb project-img">
+<img src="Last Defence Level Menu.png" alt="Last Defence Level Menu" class="game-thumb project-img">
+<img src="Last Defence Skill tree.png" alt="Last Defence Skill Tree" class="game-thumb project-img">
 
       <!-- Add a fifth image if desired -->
     </div>
@@ -976,7 +1006,7 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <!-- poster fallback in case video can't load -->
   </div>
 </section>
-<section class="game-entry"id="ChildrenofChaos">
+<section class="game-entry" id="ChildrenofChaos">
   <div class="game-details">
     <h2 class="game-title">Children of Chaos</h2>
     <p class="game-desc">
@@ -1006,7 +1036,7 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <video src="Children of Chaos Gameplay.mp4" poster="Children of Chaos Banner.png" class="game-cover project-img" controls muted playsinline loop></video>
   </div>
 </section>
-<section class="game-entry"id="UE5DrivingSim">
+<section class="game-entry" id="UE5DrivingSim">
   <div class="game-details">
     <h2 class="game-title">Unreal Engine 5 Driving Simulation</h2>
     <p class="game-desc">
@@ -1022,7 +1052,7 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <img src="Cesium UE5.png" alt="Cesium Unreal Engine 5 Map" class="game-cover project-img">
   </div>
 </section>
-<section class="game-entry"id="AIAbalonGame">
+<section class="game-entry" id="AIAbalonGame">
   <div class="game-details">
     <h2 class="game-title">AI Abalone Game</h2>
     <p class="game-desc">
@@ -1507,16 +1537,7 @@ document.querySelectorAll('.media-fadeout-clone').forEach(clone => clone.remove(
 
 
 
-<div id="imgModal" style="
-  display:none;
-  position:fixed;z-index:99;top:0;left:0;width:100vw;height:100vh;
-  background:rgba(10,18,33,0.93);
-  justify-content:center;align-items:center;">
-  <img id="imgModalImg" src="" alt="Game image" style="max-width:90vw;max-height:90vh;border-radius:18px;box-shadow:0 4px 32px #0cf9ff55;">
-</div>
-
-
-<footer style="
+<footer class="site-footer" style="
   max-width: 880px;
   margin: 68px auto 36px auto;
   padding: 2.2em 1em 1.6em 1em;
