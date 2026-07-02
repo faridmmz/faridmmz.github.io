@@ -339,11 +339,11 @@
   }
 }
 @media (max-width: 800px) {
-  .contact-section { padding: 2em 1.1em 1.6em 1.1em; }
+  .contact-section { padding: 2em 1.6em 1.6em 1.6em; }
   .contact-list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 500px) {
-  .contact-section { padding: 1.3em 1.1em; }
+  .contact-section { padding: 1.4em 1.5em; }
   .contact-list { grid-template-columns: 1fr; gap: 0.7em; }
 }
 
@@ -513,7 +513,7 @@
     }
     @media (max-width: 900px) {
       .about-me-section { font-size: 1em; }
-      .skill-box { padding: 2.5em 1em 1.8em 1em;}
+      .skill-box { padding: 2.5em 1.4em 1.8em 1.4em;}
       .skill-box h2 { font-size: 1.9em; }
       .skill-box .box-desc { font-size: 1.1em; padding: 0 0.4em; }
       .network-tree-container { width:99vw; height:900px;}
@@ -522,7 +522,7 @@
     }
     @media (max-width: 600px) {
       .about-me-section { font-size: 0.9em; }
-      .skill-box { padding: 1.5em 1.1em 1.1em 1.1em;}
+      .skill-box { padding: 1.5em 1.5em 1.1em 1.5em;}
       .skill-box h2 { font-size: 1.5em; }
       .skill-box .box-desc { font-size: 0.95em; }
       .network-tree-container { width:99vw; height:1180px;}
@@ -552,7 +552,7 @@
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: auto;
         gap: 1.7em 0.6em;
-        padding: 0.4em 0.9em 1.8em 0.9em;
+        padding: 0.4em 1.3em 1.8em 1.3em;
       }
       .node, .node.core {
         position: static;
@@ -725,7 +725,7 @@
 
 
 @media (max-width: 900px) {
-  .game-entry { flex-direction: column; padding: 1.8em 1.1em; }
+  .game-entry { flex-direction: column; padding: 1.8em 1.5em; }
   .game-cover-wrap, .game-details {
     flex-basis: 100% !important;
     max-width: 100vw;
@@ -740,7 +740,7 @@
   .projects-header { font-size: 1.7em; margin: 50px auto 24px auto; padding-right: 0.5em; }
 }
 @media (max-width: 500px) {
-  .game-entry { padding: 1.4em 1.1em; gap: 1.4em; }
+  .game-entry { padding: 1.4em 1.4em; gap: 1.4em; }
   .game-title { font-size: 1.28em; }
   .game-desc { font-size: 0.96em; }
 }
@@ -811,11 +811,11 @@
     font-size: 0.97em;
     padding: 0.7em 0.7em;
     border-radius: 9px;
-    max-width: 95vw;
+    max-width: 89vw;
   }
   .site-footer {
-    max-width: 94vw !important;
-    padding: 1.4em 0.8em 1.1em 0.8em !important;
+    max-width: 89vw !important;
+    padding: 1.4em 1.2em 1.1em 1.2em !important;
     font-size: 1em !important;
     margin: 44px auto 28px auto !important;
   }
@@ -851,12 +851,12 @@
   .contact-section,
   .skill-box,
   .game-entry {
-    max-width: 94vw;
+    max-width: 89vw;
     box-sizing: border-box;
   }
   .projects-header {
-    width: 94vw;
-    max-width: 94vw;
+    width: 89vw;
+    max-width: 89vw;
     box-sizing: border-box;
   }
 }
@@ -1147,6 +1147,34 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <img src="Abalone Game.jpg" alt="AI Abalone Game Cover" class="game-cover project-img">
   </div>
 </section>
+<section class="game-entry" id="StuffHappensGame">
+  <div class="game-details">
+    <h2 class="game-title">Stuff Happens Game</h2>
+    <p class="game-desc">
+      A web-based turn-based strategy game—a digital take on the "Stuff Happens" card game—featuring complex state management and adaptive outcomes driven by player choices.
+    </p>
+    <div class="game-meta">
+      <div><b>Role:</b> Full-Stack Developer</div>
+      <div><b>Tech Used:</b> React, Node.js</div>
+      <div style="margin-top:0.7em;">
+    <a href="https://github.com/faridmmz/Stuff-Happens-Restaurant-Edition" target="_blank"
+      style="display:inline-block; padding:0.37em 1.15em; margin-top:0.15em;
+      background:linear-gradient(90deg,#2191f3 60%,#1fe4c6 100%);
+      color:#fff; font-family:'Pixellari','Segoe UI',Arial,sans-serif;
+      font-size:1.12em; font-weight:800; border-radius:8px; text-decoration:none;
+      box-shadow:0 2px 10px #0cf9ff38,0 1px 7px #13274f50; transition:background .18s;">
+      🎲&nbsp;Repository Available on GitHub
+    </a>
+  </div>
+    </div>
+    <div class="game-images">
+      <img src="Stuff Happens Game History.png" alt="Stuff Happens Game History" class="game-thumb project-img">
+    </div>
+  </div>
+  <div class="game-cover-wrap">
+    <img src="Stuff Happens.png" alt="Stuff Happens Game" class="game-cover project-img">
+  </div>
+</section>
 <!--<section class="game-entry">
   <div class="game-details">
     <h2 class="game-title">Chromind</h2>
@@ -1280,22 +1308,22 @@ window.addEventListener('resize', stackWallBg);
 
 
 
-    // Skill data:
+    // Skill data: Fully optimized from professional CV and profile credentials
     const data = {
       "cat-programming": [
-        "Python","C#","Java","C++","C","GDScript","Bash / PowerShell","Git & Version Control","OOP","Linux"
+        "Python", "C#", "C++", "TypeScript", "JavaScript", "Java", ".NET Core", "CUDA", "Bash / PowerShell", "Linux Systems", "Git & Version Control"
       ],
       "cat-engines": [
-        "Unity","Unreal Engine","Godot","Blender","Photoshop"
+        "Unity Engine", "Unreal Engine 5", "Godot Engine", "Blender 3D", "Photoshop", "Cesium Integration"
       ],
       "cat-soft": [
-        "Problem Solving","Critical Thinking","Communication","Teamwork","Documentation","Agile/Scrum","Bug Tracking (Jira/Trello)","Public Speaking"
+        "Technical Documentation", "Agile / Scrum Methodologies", "Staying Calm Under Pressure", "Teamwork & Collaboration", "Public Speaking", "Problem Solving", "Jira / Trello / Bug Tracking"
       ],
       "cat-ai": [
-        "Deep Learning","Machine Learning","Computer Vision","Neural Networks", "Reinforcement Learning"
+        "Deep Learning", "Computer Vision (OpenCV)", "LLM Distributed Tracing", "RAG Systems", "Transformers & Neural Networks", "Reinforcement Learning", "PyTorch & TensorFlow", "Langfuse", "FastAPI & Pydantic"
       ],
       "cat-gamedev": [
-        "Game Development","Game Design","Level Design","Prototyping","Playtesting & Balancing","UI/UX for Games","Particle Systems"
+        "Game Programming", "Gameplay AI (Minimax / Alpha-Beta)", "Behavior Design & Decision Logic", "Level Design & World Building", "Prototyping & Iteration", "React 19 / TypeScript Dashboards", "Recharts & React Portals", "Docker & Multi-Stage Containers"
       ]
     };
     const map = {
@@ -1305,12 +1333,73 @@ window.addEventListener('resize', stackWallBg);
       "cat-ai": "skills-ai",
       "cat-gamedev": "skills-gamedev"
     };
+    // Maps a subskill label to the project section it best demonstrates.
+    // Skills with no single clear project (soft skills, general tooling)
+    // fall back to scrolling to the top of the projects list instead.
+    const skillProjectMap = {
+      "C#": "LingoLooper",
+      ".NET Core": "LingoLooper",
+      "Unity Engine": "LingoLooper",
+      "Game Programming": "LingoLooper",
+      "LLM Distributed Tracing": "LingoLooper",
+      "Langfuse": "LingoLooper",
+      "Python": "LingoLooper",
+      "Deep Learning": "LingoLooper",
+      "Transformers & Neural Networks": "LingoLooper",
+      "PyTorch & TensorFlow": "LingoLooper",
+
+      "TypeScript": "PoliTOrbital",
+      "FastAPI & Pydantic": "PoliTOrbital",
+      "React 19 / TypeScript Dashboards": "PoliTOrbital",
+      "Recharts & React Portals": "PoliTOrbital",
+      "Docker & Multi-Stage Containers": "PoliTOrbital",
+
+      "Photoshop": "exobarrier",
+      "Level Design & World Building": "exobarrier",
+
+      "Blender 3D": "LastDefence",
+      "Behavior Design & Decision Logic": "LastDefence",
+
+      "JavaScript": "StuffHappensGame",
+
+      "Godot Engine": "AIAbalonGame",
+      "Gameplay AI (Minimax / Alpha-Beta)": "AIAbalonGame",
+      "Reinforcement Learning": "AIAbalonGame",
+
+      "Prototyping & Iteration": "ChildrenofChaos",
+
+      "Unreal Engine 5": "UE5DrivingSim",
+      "Cesium Integration": "UE5DrivingSim",
+      "C++": "UE5DrivingSim",
+      "CUDA": "UE5DrivingSim",
+      "Computer Vision (OpenCV)": "UE5DrivingSim",
+    };
+    // Skills that link straight out to a GitHub repo instead of a project section on this page.
+    const skillUrlMap = {
+      "RAG Systems": "https://github.com/faridmmz/Recommender-System-and-RAG",
+    };
+    function goToSkillProject(skillName) {
+      const url = skillUrlMap[skillName];
+      if (url) { window.open(url, '_blank'); return; }
+      const projectId = skillProjectMap[skillName];
+      const target = (projectId && document.getElementById(projectId)) || document.querySelector('.projects-header');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     Object.keys(map).forEach(id => {
       const node = document.getElementById(id);
       const drop = document.getElementById(map[id]);
       drop.innerHTML = data[id].map(skill =>
-        `<div class="subskill-node">${skill}</div>`
+        `<div class="subskill-node" title="View related project">${skill}</div>`
       ).join('');
+      drop.querySelectorAll('.subskill-node').forEach(skillEl => {
+        skillEl.addEventListener('click', e => {
+          e.stopPropagation();
+          document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
+          updateSkillLines();
+          goToSkillProject(skillEl.textContent.trim());
+        });
+      });
       function positionDropdown() {
         drop.style.top = (node.offsetTop + node.offsetHeight + 6) + "px";
         drop.style.left = (node.offsetLeft + node.offsetWidth/2) + "px";
@@ -1374,10 +1463,11 @@ window.addEventListener('resize', stackWallBg);
   </script>
 <script>
   const aboutParagraphs = [
-    `Well, what can I say? <strong>Game development has been a part of my life for over half a decade now!</strong>. What started as a fun side project with fellow computer engineering and artist friends has grown into my professional passion.`,
-    `I started out by co-founding <strong>Fake Reality</strong>, then joined <strong>FrostByte</strong>. My main focus is <strong>Game Programming</strong>—using <strong>C#</strong>, <strong>C++</strong>, and <strong>GDScript</strong> in <strong>Unity</strong>, <strong>Unreal Engine 5</strong>, and <strong>Godot</strong>. I've also gained hands-on experience in <strong>Game Design</strong>, <strong>Level Design</strong>, <strong>UI/UX</strong>, and <strong>World Building</strong>.`,
-    `But honestly? I can’t get enough of this world. Facing its unlimited possibilities always brings a smile to my face.`
+    `Well, what can I say? <strong>Game development and AI engineering have been my world for over half a decade now!</strong> What started as a fun side project with fellow computer engineering and artist friends has grown into my professional passion.`,
+    `I started out by co-founding <strong>Fake Reality Game Studio</strong>, later launched <strong>Frostbyte Studio</strong>, and recently served as the Lead Software Architect for the <strong>PoliTOrbital</strong> team's aerospace simulation systems. Most recently, I've been diving deep into full-stack development and contextual AI pipelines as an engineer at <strong>LingoLooper</strong>.`,
+    `My primary focus is <strong>Game Programming & AI Architecture</strong> mastering languages like <strong>C#</strong>, <strong>C++</strong>, and <strong>GDScript</strong> across <strong>Unity</strong>, <strong>Unreal Engine 5</strong>, and <strong>Godot</strong>, backed by hands-on experience in <strong>Game Design</strong>, <strong>Level Design</strong>, and <strong>UI/UX</strong>. But honestly? I can’t get enough of this world. Facing its unlimited creative possibilities always brings a smile to my face.`
   ];
+  
   const typeSpeed = 15;
   const paragraphPause = 700;
 
@@ -1517,6 +1607,7 @@ window.addEventListener('resize', stackWallBg);
 <script>
 document.querySelectorAll('.game-entry').forEach(entry => {
   const coverWrap = entry.querySelector('.game-cover-wrap');
+  if (!coverWrap) return; // text-only project card, nothing to swap
 let swapInProgress = false;
   function swapMedia(cover, thumb) {
      if (swapInProgress) return; // prevent concurrent swaps
