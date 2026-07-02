@@ -343,7 +343,7 @@
   .contact-list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 500px) {
-  .contact-section { padding: 1.2em 0.8em; }
+  .contact-section { padding: 1em 0.1em; }
   .contact-list { grid-template-columns: 1fr; gap: 0.7em; }
 }
 
@@ -873,9 +873,7 @@
   </nav>
 </header>
 
-  <!-- HERO VIDEO AND NAME -->
-<!-- LANDING HERO VIDEO (first block) -->
-<div class="responsive-video-block hero-video-block">
+  <div class="responsive-video-block hero-video-block">
   <video src="Portfolio header.mp4"
          poster="Portfolio header first frame.png"
          muted autoplay loop playsinline></video>
@@ -883,8 +881,7 @@
 </div>
 
 
- <!-- ABOUT ME SECTION -->
-<div class="about-me-section" id="about">
+ <div class="about-me-section" id="about">
   <div class="about-me-title-img">
     <h2>About Me</h2>
     <img src="Me.jpg" alt="Farid Zandi" class="about-me-img" />
@@ -892,8 +889,7 @@
   <div id="aboutme-typing"></div>
 </div>
 
- <!-- Contacts SECTION -->
-<div class="contact-section" id="contact">
+ <div class="contact-section" id="contact">
   <h2>Contact</h2>
   <div class="contact-list">
     <a href="mailto:faridmmz79@gmail.com" class="contact-item" title="Email">
@@ -926,11 +922,9 @@
 
 
 
-  <!-- WALL BACKGROUND VIDEO STACK (JS will repeat as needed) -->
   <div class="wall-bg-stack" id="wallBgStack" style="position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></div>
 
 
-  <!-- SKILLS + MAIN CONTENT -->
   <div class="main-bg-wrap">
     <div class="skill-box">
       <h2>My Skill Tree!</h2>
@@ -938,7 +932,6 @@
         This interactive skill graph maps out my core skills. <strong>Click</strong> on any skill category to explore my detailed expertise.
       </div>
       <div class="network-tree-container">
-        <!-- SVG lines under nodes (now from center of ovals) -->
         <svg class="network-lines" viewBox="0 0 1200 600">
           <line x1="120" y1="300" x2="470" y2="143" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
           <line x1="120" y1="300" x2="470" y2="300" stroke="#55d9ff" stroke-width="7" stroke-linecap="round"/>
@@ -947,14 +940,12 @@
           <line x1="587" y1="143" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
           <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
         </svg>
-        <!-- NODES -->
         <div class="node core">Core Skills</div>
         <div class="node middle" id="cat-programming">Programming</div>
         <div class="node middle2" id="cat-engines">Game Engines &amp; Tools</div>
         <div class="node middle3" id="cat-soft">Other / Soft Skills</div>
         <div class="node right" id="cat-ai">AI &amp; Data</div>
         <div class="node right2" id="cat-gamedev">Game Development</div>
-        <!-- Subskills dropdowns (JS will position them) -->
         <div class="subskills" id="skills-programming"></div>
         <div class="subskills" id="skills-engines"></div>
         <div class="subskills" id="skills-soft"></div>
@@ -962,8 +953,7 @@
         <div class="subskills" id="skills-gamedev"></div>
       </div>
     </div>
-     <!-- GAME: EXOBARRIER -->
-    <h2 class="projects-header">Selected Projects</h2>
+     <h2 class="projects-header">Selected Projects</h2>
 
 <section class="game-entry" id="LingoLooper">
       <div class="game-details">
@@ -976,7 +966,7 @@
           <div><b>Role:</b> AI / Unity Developer Intern</div>
           <div><b>Tech Used:</b> Unity, C#, ASP.NET Core, React, LLM Tracing, Cloud Services</div>
           <div><b>Duration:</b> Sep 2025 - Jun 2026 · 10 mos · Remote</div>
-          <div style="margin-top:0.7em; display:flex; flex-wrap:wrap; gap:0.6em;">
+          <div style="margin-top:0.7em; display:flex; flex-wrap:wrap; gap:0.6em; justify-content: center;">
             <a href="https://play.google.com/store/apps/details?id=com.lumilabs.LingoLooper&hl=en_US" target="_blank" style="display:inline-block; padding:0.37em 1.15em; background:linear-gradient(90deg,#2191f3 60%,#1fe4c6 100%); color:#fff; font-size:1.12em; font-weight:800; border-radius:8px; text-decoration:none; box-shadow:0 2px 10px #0cf9ff38;">📱&nbsp;Get it on Google Play</a>
             <a href="https://apps.apple.com/us/app/lingolooper-ai-language-game/id1670913076" target="_blank" style="display:inline-block; padding:0.37em 1.15em; background:linear-gradient(90deg,#2191f3 60%,#1fe4c6 100%); color:#fff; font-size:1.12em; font-weight:800; border-radius:8px; text-decoration:none; box-shadow:0 2px 10px #0cf9ff38;">🍎&nbsp;Download on the App Store</a>
             <a href="LingoLooper Work Reference.pdf" target="_blank" style="display:inline-block; padding:0.37em 1.15em; background:linear-gradient(90deg,#2191f3 60%,#1fe4c6 100%); color:#fff; font-size:1.12em; font-weight:800; border-radius:8px; text-decoration:none; box-shadow:0 2px 10px #0cf9ff38;">📄&nbsp;View Work Reference</a>
@@ -1062,13 +1052,11 @@ A 3D tower defense game where you defend the city using four distinct turret typ
 <img src="Last Defence Level Menu.png" alt="Last Defence Level Menu" class="game-thumb project-img">
 <img src="Last Defence Skill tree.png" alt="Last Defence Skill Tree" class="game-thumb project-img">
 
-      <!-- Add a fifth image if desired -->
-    </div>
+      </div>
   </div>
   <div class="game-cover-wrap">
 <video src="Last Defence.mp4"  class="game-cover project-img" controls muted playsinline loop></video>
-    <!-- poster fallback in case video can't load -->
-  </div>
+    </div>
 </section>
 <section class="game-entry" id="ChildrenofChaos">
   <div class="game-details">
@@ -1144,26 +1132,6 @@ A 3D tower defense game where you defend the city using four distinct turret typ
     <img src="Abalone Game.jpg" alt="AI Abalone Game Cover" class="game-cover project-img">
   </div>
 </section>
-<!--<section class="game-entry">
-  <div class="game-details">
-    <h2 class="game-title">Chromind</h2>
-    <p class="game-desc">
-      Chromind is a 3D hypercasual game designed to be fun, calm, and easy to learn. Players watch and memorize a cube’s movement pattern, then try to mimic it. The experience is elevated with soothing rain effects, a gentle soundtrack, and vibrant colors to fully immerse and relax the player.
-    </p>
-    <div class="game-meta">
-      <div><b>Role:</b> Lead Programmer, Game Designer</div>
-      <div><b>Tech Used:</b> Unity, C#, Photoshop</div>
-    </div>
-    
-  </div>
-  <div class="game-cover-wrap">
-    <video src="Chromind.mp4"  class="game-cover project-img" controls muted playsinline loop></video>
-  </div>
-</section>-->
-
-
-
-<!-- Modal for image zoom -->
 <div id="imgModal" style="
   display:none;
   position:fixed;z-index:99;top:0;left:0;width:100vw;height:100vh;
@@ -1212,7 +1180,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
 // Highlight nav link on scroll
 const navLinks = document.querySelectorAll('.nav-link');
 const sectionMap = [
-  {selector:'#about',   link:navLinks[0]},
+  {selector:'#about',    link:navLinks[0]},
   {selector:'#contact', link:navLinks[1]},
   {selector:'.skill-box',link:navLinks[2]},
   {selector:'.projects-header',link:navLinks[3]},
@@ -1314,18 +1282,18 @@ window.addEventListener('resize', stackWallBg);
         drop.style.transform = "translateX(-50%)";
       }
       node.addEventListener("click", e => {
-      e.stopPropagation();
-      // If this dropdown is already open, close it (toggle off)
-      if (drop.classList.contains('open')) {
-        drop.classList.remove('open');
-      } else {
-        // Close all others, open this one
-        document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
-        positionDropdown();
-        drop.classList.add('open');
-      }
-      updateSkillLines(); // opening/closing a dropdown reflows sibling nodes on mobile
-    });
+        e.stopPropagation();
+        // If this dropdown is already open, close it (toggle off)
+        if (drop.classList.contains('open')) {
+          drop.classList.remove('open');
+        } else {
+          // Close all others, open this one
+          document.querySelectorAll('.subskills.open').forEach(d => d.classList.remove('open'));
+          positionDropdown();
+          drop.classList.add('open');
+        }
+        updateSkillLines(); // opening/closing a dropdown reflows sibling nodes on mobile
+      });
 
       window.addEventListener('resize', () => {
         if (drop.classList.contains('open')) positionDropdown();
