@@ -842,17 +842,21 @@
 /* On phones these panels have nothing to constrain their width but their own
    (often thin) padding, so they end up flush against the screen edges.
    Cap them narrower than the viewport so margin:auto gives a real outer gutter,
-   same trick already used for .final-note-bottom / .site-footer above. */
+   same trick already used for .final-note-bottom / .site-footer above. None of
+   them set box-sizing, so without border-box here their own padding+border
+   would just get added on top of the max-width and eat the gutter again. */
 @media (max-width: 700px) {
   .about-me-section,
   .contact-section,
   .skill-box,
   .game-entry {
     max-width: 94vw;
+    box-sizing: border-box;
   }
   .projects-header {
     width: 94vw;
     max-width: 94vw;
+    box-sizing: border-box;
   }
 }
 
