@@ -534,51 +534,50 @@
       .node.right { top:20%; left:75%;}
       .node.right2 { top:65%; left:75%;}
     }
-    /* On phones, nodes flow top-to-bottom in a zig-zag instead of the fixed
-       desktop grid; the connector lines are recomputed in JS (updateSkillLines)
-       from each node's real rendered position, so they always line up. */
+    /* On phones, a single vertical column can't avoid crossing lines: Game
+       Development has two parents (Programming and Engines), which forces a
+       long diagonal in any 1-column order. A 3-column grid mirrors the
+       desktop layout's non-crossing fan-out instead: Core on its own row,
+       Programming/Engines/Soft below it, AI/GameDev directly under their
+       respective parents. Connector lines are recomputed in JS
+       (updateSkillLines) from each node's real rendered position. */
     @media (max-width: 700px) {
       .network-tree-container {
         width: 100%;
         max-width: 100%;
         height: auto;
         min-height: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.9em;
-        padding: 0.4em 3%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: auto;
+        gap: 1.7em 0.5em;
+        padding: 0.4em 0.2em 1.8em 0.2em;
       }
       .node, .node.core {
         position: static;
-        width: auto;
-        min-width: 150px;
-        max-width: 72%;
-        box-sizing: border-box;
-        font-size: 0.92em;
-        margin: 0;
-      }
-      .node.core { order: 1; align-self: center; }
-      #cat-programming { order: 2; align-self: flex-start; }
-      #skills-programming { order: 3; }
-      #cat-engines { order: 4; align-self: flex-end; }
-      #skills-engines { order: 5; }
-      #cat-soft { order: 6; align-self: flex-start; }
-      #skills-soft { order: 7; }
-      #cat-ai { order: 8; align-self: flex-start; margin-left: 14%; }
-      #skills-ai { order: 9; }
-      #cat-gamedev { order: 10; align-self: flex-end; }
-      #skills-gamedev { order: 11; }
-      .subskills {
-        position: static;
-        transform: none !important;
-        width: 86%;
+        width: 100%;
         min-width: 0;
         max-width: none;
         box-sizing: border-box;
-        border-radius: 0.9em;
+        font-size: 0.8em;
+        padding: 0.75em 0.4em;
         margin: 0;
-        align-self: center;
+      }
+      .node.core {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        justify-self: center;
+        max-width: 68%;
+        font-size: 0.9em;
+      }
+      #cat-programming { grid-column: 1; grid-row: 2; }
+      #cat-engines     { grid-column: 2; grid-row: 2; }
+      #cat-soft        { grid-column: 3; grid-row: 2; }
+      #cat-ai          { grid-column: 1; grid-row: 3; }
+      #cat-gamedev     { grid-column: 2; grid-row: 3; }
+      .subskills {
+        min-width: 0;
+        max-width: 88vw;
       }
     }
     .projects-header {
