@@ -534,6 +534,53 @@
       .node.right { top:20%; left:75%;}
       .node.right2 { top:65%; left:75%;}
     }
+    /* On phones the spatial node graph + hand-drawn SVG connector lines can't
+       be meaningfully rescaled to a tall portrait viewport, so switch to a
+       simple stacked list instead. */
+    @media (max-width: 700px) {
+      .network-tree-container {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6em;
+        padding: 0.3em 0.2em;
+      }
+      .network-lines { display: none; }
+      .node, .node.core {
+        position: static;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        box-sizing: border-box;
+        font-size: 1em;
+        margin: 0;
+      }
+      .subskills {
+        position: static;
+        transform: none !important;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        box-sizing: border-box;
+        border-radius: 0.9em;
+        margin: 0 0 0.3em 0;
+      }
+      .node.core { order: 1; }
+      #cat-programming { order: 2; }
+      #skills-programming { order: 3; }
+      #cat-engines { order: 4; }
+      #skills-engines { order: 5; }
+      #cat-soft { order: 6; }
+      #skills-soft { order: 7; }
+      #cat-ai { order: 8; }
+      #skills-ai { order: 9; }
+      #cat-gamedev { order: 10; }
+      #skills-gamedev { order: 11; }
+    }
     .projects-header {
   width: 100%;
   max-width: 1320px;
@@ -884,12 +931,12 @@
           <line x1="587" y1="300" x2="870" y2="410" stroke="#43e9e3" stroke-width="6" stroke-linecap="round"/>
         </svg>
         <!-- NODES -->
-        <div class="node core" style="top: 44%; left: 3%;">Core Skills</div>
-        <div class="node middle" id="cat-programming" style="top: 15%; left: 33%;">Programming</div>
-        <div class="node middle2" id="cat-engines" style="top: 44%; left: 33%;">Game Engines &amp; Tools</div>
-        <div class="node middle3" id="cat-soft" style="top: 73%; left: 33%;">Other / Soft Skills</div>
-        <div class="node right" id="cat-ai" style="top: 25%; left: 71%;">AI &amp; Data</div>
-        <div class="node right2" id="cat-gamedev" style="top: 64%; left: 71%;">Game Development</div>
+        <div class="node core">Core Skills</div>
+        <div class="node middle" id="cat-programming">Programming</div>
+        <div class="node middle2" id="cat-engines">Game Engines &amp; Tools</div>
+        <div class="node middle3" id="cat-soft">Other / Soft Skills</div>
+        <div class="node right" id="cat-ai">AI &amp; Data</div>
+        <div class="node right2" id="cat-gamedev">Game Development</div>
         <!-- Subskills dropdowns (JS will position them) -->
         <div class="subskills" id="skills-programming"></div>
         <div class="subskills" id="skills-engines"></div>
